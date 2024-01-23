@@ -6,7 +6,12 @@
   ],
   "exports": {
     "./styles.css": "./dist/index.css",
-    "./card": "./src/card.tsx"
+    "./card": "./src/card.tsx",
+    "./doubleAction": "./src/doubleAction.tsx",
+    "./freeAction": "./src/freeAction.tsx",
+    "./reaction": "./src/reaction.tsx",
+    "./singleAction": "./src/singleAction.tsx",
+    "./tripleAction": "./src/tripleAction.tsx"
   },
   "license": "MIT",
   "scripts": {
