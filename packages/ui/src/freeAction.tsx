@@ -1,12 +1,12 @@
-export const FreeAction = () => {
+export function FreeAction(): JSX.Element{
   return (
     <svg
+      aria-label="Free Action"
       width="1.5em"
       height="1.5em"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      arie-label="Free Action"
     >
       <title id="free-action-icon">Free Action</title>
       <path

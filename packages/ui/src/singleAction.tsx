@@ -1,4 +1,4 @@
-export const SingleAction = () => {
+export function SingleAction(): JSX.Element {
   return (
     <svg
       width="1.5em"

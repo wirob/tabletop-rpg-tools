@@ -1,4 +1,4 @@
-export const TripleAction = () => {
+export function TripleAction(): JSX.Element {
   return (
     <svg
       width="3.2em"

@@ -1,4 +1,4 @@
-export const Reaction = () => {
+export function Reaction(): JSX.Element {
   return (
     <svg
       width="1.5em"
