@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import { DoubleAction } from '@repo/ui/doubleAction'
-import { FreeAction } from '@repo/ui/freeAction'
-import { SingleAction } from '@repo/ui/singleAction'
-import { TripleAction } from '@repo/ui/tripleAction'
-import { Reaction } from '@repo/ui/reaction'
+import {
+  FreeAction,
+  SingleAction,
+  TripleAction,
+  Reaction,
+} from '@repo/ui/icons'
 import styles from './page.module.css'
 
 enum Action {
@@ -30,11 +32,14 @@ export default function Page(): JSX.Element {
     reaction: false,
   })
 
-  const handleCount = (cost: number) => {
+  const handleCount: (cost: number) => void = (cost) => {
     setCount(count + cost)
   }
 
-  const handleClick = (cost: number, action: Action) => {
+  const handleClick: (cost: number, action: Action) => void = (
+    cost,
+    action
+  ) => {
     console.log(cost, ' ', action)
     handleCount(cost)
     if (!actions[action]) {
@@ -65,7 +70,7 @@ export default function Page(): JSX.Element {
         <TripleAction />
         <Reaction />
 
-        <h1 className="text-3xl font-bold underline text-white">
+        <h1 className="text-3xl font-bold underline text-slate-500">
           Hello world!
         </h1>
       </div>
