@@ -10,13 +10,7 @@ import {
 import { DoubleActionButton } from '@repo/ui/doubleAction'
 import styles from './page.module.css'
 
-enum Action {
-  Free = 'free',
-  Single = 'single',
-  Double = 'double',
-  Triple = 'triple',
-  Reaction = 'reaction',
-}
+type Action = 'free' |'single' |'double' |'triple' | 'reaction'
 
 type Actions = {
   [key in Action]: boolean
@@ -64,7 +58,7 @@ export default function Page(): JSX.Element {
         <DoubleActionButton
           disabled={actions.double}
           onClick={() => {
-            handleClick(2, Action.Double)
+            handleClick(2, 'double')
           }}
         />
         <TripleActionIcon />
