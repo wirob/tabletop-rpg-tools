@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { DoubleAction } from '@repo/ui/doubleAction'
 import {
-  FreeAction,
-  SingleAction,
-  TripleAction,
-  Reaction,
+  FreeAction as FreeActionIcon,
+  SingleAction as SingleActionIcon,
+  TripleAction as TripleActionIcon,
+  Reaction as ReactionIcon,
 } from '@repo/ui/icons'
+import { DoubleActionButton } from '@repo/ui/doubleAction'
 import styles from './page.module.css'
 
 enum Action {
@@ -40,7 +40,7 @@ export default function Page(): JSX.Element {
     cost,
     action
   ) => {
-    console.log(cost, ' ', action)
+    // console.log(cost, ' ', action)
     handleCount(cost)
     if (!actions[action]) {
       setActions({ ...actions, [action]: true })
@@ -48,7 +48,7 @@ export default function Page(): JSX.Element {
   }
 
   useEffect(() => {
-    console.log(`actions taken are:`, actions)
+    // console.log(`actions taken are:`, actions)
   }, [actions])
 
   return (
@@ -59,16 +59,16 @@ export default function Page(): JSX.Element {
           alignItems: 'center',
         }}
       >
-        <FreeAction />
-        <SingleAction />
-        <DoubleAction
+        <FreeActionIcon />
+        <SingleActionIcon />
+        <DoubleActionButton
           disabled={actions.double}
           onClick={() => {
             handleClick(2, Action.Double)
           }}
         />
-        <TripleAction />
-        <Reaction />
+        <TripleActionIcon />
+        <ReactionIcon />
 
         <h1 className="text-3xl font-bold underline text-slate-500">
           Hello world!
