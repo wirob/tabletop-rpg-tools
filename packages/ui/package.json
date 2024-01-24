@@ -5,10 +5,11 @@
     "**/*.css"
   ],
   "exports": {
-    "./styles.css": "./dist/index.css",
     "./card": "./src/card.tsx",
     "./doubleAction": "./src/doubleAction.tsx",
-    "./icons": "./src/icons/index.ts"
+    "./icons": "./src/icons/index.ts",
+    "./styles.css": "./dist/index.css",
+    "./theme": "./src/theme/index.ts"
   },
   "license": "MIT",
   "scripts": {
@@ -21,11 +22,16 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/react": "^18.2.46",
     "autoprefixer": "^10.4.16",
+    "framer-motion": "^11.0.3",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "tailwindcss": "^3.4.0",
