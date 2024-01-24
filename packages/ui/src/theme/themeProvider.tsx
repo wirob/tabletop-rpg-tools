@@ -1,3 +1,5 @@
+'use client'
+
 import type { PropsWithChildren } from 'react'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
