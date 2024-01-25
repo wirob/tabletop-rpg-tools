@@ -1,5 +1,3 @@
-'use client'
-
 import { IconButton } from '@repo/ui/chakra'
 
 interface ActionButtonProps {
@@ -19,7 +17,7 @@ export function ActionButton({
   return (
     <IconButton
       aria-label={label}
-      disabled={disabled}
+      isDisabled={disabled}
       onClick={onClick}
     >
       {children}
