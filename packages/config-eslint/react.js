@@ -43,5 +43,6 @@ module.exports = {
         case: 'camelCase',
       },
     ],
+    'no-undef': 'off', // ts(2304)
   },
 }
