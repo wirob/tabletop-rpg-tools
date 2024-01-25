@@ -7,7 +7,6 @@
   "exports": {
     "./card": "./src/card.tsx",
     "./chakra": "./src/chakra.ts",
-    "./doubleAction": "./src/doubleAction.tsx",
     "./icons": "./src/icons/index.ts",
     "./styles.css": "./dist/index.css",
     "./theme": "./src/theme/index.ts"
