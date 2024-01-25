@@ -2,7 +2,7 @@ import { Icon } from '@chakra-ui/react'
 
 export function TripleAction(): JSX.Element {
   return (
-    <Icon boxSize={12} viewBox="0 0 51 24">
+    <Icon h={10} viewBox="0 0 51 24" width="auto">
       <path
         d="m6.942 18.161 6.221-6.171L6.95 5.786 12.755 0l12.01 12.013L12.777 24l-5.836-5.839Z"
         fill="currentColor"
