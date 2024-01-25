@@ -8,9 +8,8 @@ import {
   Reaction as ReactionIcon,
 } from '@repo/ui/icons'
 import { DoubleActionButton } from '@repo/ui/doubleAction'
+import { ActionButton } from './components/actionButtons'
 import styles from './page.module.css'
-
-type Action = 'free' |'single' |'double' |'triple' | 'reaction'
 
 type Actions = {
   [key in Action]: boolean
@@ -30,9 +29,9 @@ export default function Page(): JSX.Element {
     setCount(count + cost)
   }
 
-  const handleClick: (cost: number, action: Action) => void = (
-    cost,
-    action
+  const handleClick: (action: Action, cost: number) => void = (
+    action,
+    cost
   ) => {
     // console.log(cost, ' ', action)
     handleCount(cost)
@@ -53,12 +52,21 @@ export default function Page(): JSX.Element {
           alignItems: 'center',
         }}
       >
-        <FreeActionIcon />
+        <ActionButton
+          disabled={actions.free}
+          label="free action"
+          onClick={() => {
+            handleClick('free', 0)
+          }}
+        >
+          <FreeActionIcon />
+        </ActionButton>
+
         <SingleActionIcon />
         <DoubleActionButton
           disabled={actions.double}
           onClick={() => {
-            handleClick(2, 'double')
+            handleClick('double', 2)
           }}
         />
         <TripleActionIcon />
