@@ -6,8 +6,9 @@ import {
   SingleAction as SingleActionIcon,
   TripleAction as TripleActionIcon,
   Reaction as ReactionIcon,
+  DoubleAction as DoubleActionIcon,
 } from '@repo/ui/icons'
-import { DoubleActionButton } from '@repo/ui/doubleAction'
+import { Button } from '@repo/ui/chakra'
 import { ActionButton } from './components/actionButtons'
 import styles from './page.module.css'
 
@@ -33,11 +34,20 @@ export default function Page(): JSX.Element {
     action,
     cost
   ) => {
-    // console.log(cost, ' ', action)
     handleCount(cost)
     if (!actions[action]) {
       setActions({ ...actions, [action]: true })
     }
+  }
+
+  const handleReset: () => void = () => {
+    setActions({
+      free: false,
+      single: false,
+      double: false,
+      triple: false,
+      reaction: false,
+    })
   }
 
   useEffect(() => {
@@ -62,15 +72,52 @@ export default function Page(): JSX.Element {
           <FreeActionIcon />
         </ActionButton>
 
-        <SingleActionIcon />
-        <DoubleActionButton
+        <ActionButton
+          disabled={actions.single}
+          label="single action"
+          onClick={() => {
+            handleClick('single', 1)
+          }}
+        >
+          <SingleActionIcon />
+        </ActionButton>
+
+        <ActionButton
           disabled={actions.double}
+          label="double action"
           onClick={() => {
             handleClick('double', 2)
           }}
-        />
-        <TripleActionIcon />
-        <ReactionIcon />
+        >
+          <DoubleActionIcon />
+        </ActionButton>
+
+        <ActionButton
+          disabled={actions.triple}
+          label="triple action"
+          onClick={() => {
+            handleClick('triple', 3)
+          }}
+        >
+          <TripleActionIcon />
+        </ActionButton>
+
+        <ActionButton
+          disabled={actions.reaction}
+          label="reaction"
+          onClick={() => {
+            handleClick('reaction', 0)
+          }}
+        >
+          <ReactionIcon />
+        </ActionButton>
+        <Button
+          onClick={() => {
+            handleReset()
+          }}
+        >
+          Reset
+        </Button>
       </div>
     </main>
   )
