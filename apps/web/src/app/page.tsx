@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   FreeAction as FreeActionIcon,
   SingleAction as SingleActionIcon,
@@ -8,8 +8,7 @@ import {
   Reaction as ReactionIcon,
   DoubleAction as DoubleActionIcon,
 } from '@repo/ui/icons'
-import { Button } from '@repo/ui/chakra'
-import { ActionButton } from './components/actionButtons'
+import { Button, IconButton } from '@repo/ui/chakra'
 import styles from './page.module.css'
 
 type Actions = {
@@ -17,7 +16,7 @@ type Actions = {
 }
 
 export default function Page(): JSX.Element {
-  const [count, setCount] = useState(0)
+  const [actionsUsed, setActionsUsed] = useState(0)
   const [actions, setActions] = useState<Actions>({
     free: false,
     single: false,
@@ -26,18 +25,19 @@ export default function Page(): JSX.Element {
     reaction: false,
   })
 
-  const handleCount: (cost: number) => void = (cost) => {
-    setCount(count + cost)
-  }
-
   const handleClick: (action: Action, cost: number) => void = (
     action,
     cost
   ) => {
-    handleCount(cost)
-    if (!actions[action]) {
-      setActions({ ...actions, [action]: true })
-    }
+    setActionsUsed(actionsUsed + cost)
+
+    const actionsOverride = { ...actions }
+    if (action === 'reaction') actionsOverride.reaction = true
+    if (actionsUsed + cost >= 1) actionsOverride.triple = true
+    if (actionsUsed + cost >= 2) actionsOverride.double = true
+    if (actionsUsed + cost >= 3) actionsOverride.single = true
+
+    setActions(actionsOverride)
   }
 
   const handleReset: () => void = () => {
@@ -48,11 +48,8 @@ export default function Page(): JSX.Element {
       triple: false,
       reaction: false,
     })
+    setActionsUsed(0)
   }
-
-  useEffect(() => {
-    // console.log(`actions taken are:`, actions)
-  }, [actions])
 
   return (
     <main className={styles.main}>
