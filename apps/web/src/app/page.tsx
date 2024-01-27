@@ -62,55 +62,51 @@ export default function Page(): JSX.Element {
           alignItems: 'center',
         }}
       >
-        <ActionButton
-          disabled={actions.free}
-          label="free action"
+        <IconButton
+          aria-label="free action"
+          icon={<FreeActionIcon />}
+          isDisabled={actions.free}
           onClick={() => {
             handleClick('free', 0)
           }}
-        >
-          <FreeActionIcon />
-        </ActionButton>
+        />
 
-        <ActionButton
-          disabled={actions.single}
-          label="single action"
+        <IconButton
+          aria-label="single action"
+          icon={<SingleActionIcon />}
+          isDisabled={actions.single}
           onClick={() => {
             handleClick('single', 1)
           }}
-        >
-          <SingleActionIcon />
-        </ActionButton>
+        />
 
-        <ActionButton
-          disabled={actions.double}
-          label="double action"
+        <IconButton
+          aria-label="double action"
+          icon={<DoubleActionIcon />}
+          isDisabled={actions.double}
           onClick={() => {
             handleClick('double', 2)
           }}
-        >
-          <DoubleActionIcon />
-        </ActionButton>
+        />
 
-        <ActionButton
-          disabled={actions.triple}
-          label="triple action"
+        <IconButton
+          aria-label="triple action"
+          icon={<TripleActionIcon />}
+          isDisabled={actions.triple}
           onClick={() => {
             handleClick('triple', 3)
           }}
-        >
-          <TripleActionIcon />
-        </ActionButton>
+        />
 
-        <ActionButton
-          disabled={actions.reaction}
-          label="reaction"
+        <IconButton
+          aria-label="reaction"
+          icon={<ReactionIcon />}
+          isDisabled={actions.reaction}
           onClick={() => {
             handleClick('reaction', 0)
           }}
-        >
-          <ReactionIcon />
-        </ActionButton>
+        />
+
         <Button
           onClick={() => {
             handleReset()
