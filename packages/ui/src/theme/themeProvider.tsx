@@ -8,7 +8,18 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 }
 
-const theme = extendTheme({})
+const theme = extendTheme({
+  config,
+  styles: {
+    global: {
+      body: {
+        minHeight: '100vh',
+        padding: 0,
+        margin: 0,
+      },
+    },
+  },
+})
 
 export function ThemeProvider(props: PropsWithChildren): JSX.Element {
   return <ChakraProvider theme={theme} {...props} />
