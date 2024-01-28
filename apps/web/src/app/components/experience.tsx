@@ -63,7 +63,9 @@ export default function Experience(): JSX.Element {
       </Stat>
       <Stack>
         <NumberInput
+          clampValueOnBlur={false}
           inputMode="numeric"
+          keepWithinRange={false}
           max={maxExp}
           maxW={20}
           onChange={(_, valueAsNumber) => {
@@ -74,8 +76,6 @@ export default function Experience(): JSX.Element {
           }}
           size="xs"
           step={10}
-          keepWithinRange={false}
-          clampValueOnBlur={false}
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -86,12 +86,12 @@ export default function Experience(): JSX.Element {
       </Stack>
 
       <Button
-        size="xs"
         colorScheme="green"
         isDisabled={invalidInput}
         onClick={() => {
           handleAddExp()
         }}
+        size="xs"
       >
         {expButtonText}
       </Button>
