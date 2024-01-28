@@ -99,6 +99,7 @@ export default function Actions(): JSX.Element {
       />
 
       <Button
+        colorScheme="red"
         onClick={() => {
           handleReset()
         }}
