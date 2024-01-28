@@ -52,7 +52,7 @@ export default function Actions(): JSX.Element {
   }
 
   return (
-    <div className="grid gap-2 grid-cols-6">
+    <div className="grid gap-2 grid-cols-6 mt-4">
       <IconButton
         aria-label="free action"
         icon={<FreeActionIcon />}
