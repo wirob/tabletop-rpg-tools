@@ -66,7 +66,7 @@ export default function Experience(): JSX.Element {
           inputMode="numeric"
           max={maxExp}
           maxW={20}
-          onChange={(valueAsString, valueAsNumber) => {
+          onChange={(_, valueAsNumber) => {
             handleChange(valueAsNumber)
           }}
           onInvalid={() => {
