@@ -15,6 +15,8 @@ import {
 } from '@repo/ui/chakra'
 import { useEffect, useState } from 'react'
 
+type ExpButtonText = 'Add exp' | 'Remove exp'
+
 const getExpFromLS: () => number | false = () => {
   const item = localStorage.getItem('userExp')
 
@@ -25,7 +27,7 @@ const getExpFromLS: () => number | false = () => {
 export default function Experience(): JSX.Element {
   const maxExp = 999
 
-  const [expButtonText, setExpButtonText] = useState('Add exp')
+  const [expButtonText, setExpButtonText] = useState<ExpButtonText>('Add exp')
   const [currentExp, setCurrentExp] = useState(getExpFromLS() || 0)
   const [invalidInput, setInvalidInput] = useState(false)
   const [expToSet, setExpToSet] = useState(0)
