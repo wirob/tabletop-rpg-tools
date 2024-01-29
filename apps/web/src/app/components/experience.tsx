@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import {
   Button,
   NumberInput,
@@ -13,22 +15,14 @@ import {
   StatLabel,
   StatNumber,
 } from '@repo/ui/chakra'
-import { useEffect, useState } from 'react'
 
 type ExpButtonText = 'Add exp' | 'Remove exp'
-
-const getExpFromLS: () => number | false = () => {
-  const item = localStorage.getItem('userExp')
-
-  if (item !== null) return Number(item)
-  return false
-}
 
 export default function Experience(): JSX.Element {
   const maxExp = 999
 
   const [expButtonText, setExpButtonText] = useState<ExpButtonText>('Add exp')
-  const [currentExp, setCurrentExp] = useState(getExpFromLS() || 0)
+  const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(false)
   const [expToSet, setExpToSet] = useState(0)
 
@@ -44,10 +38,6 @@ export default function Experience(): JSX.Element {
     if (expToSet < 0) setExpButtonText('Remove exp')
     else setExpButtonText('Add exp')
   }, [expToSet])
-
-  useEffect(() => {
-    localStorage.setItem('userExp', JSON.stringify(currentExp))
-  }, [currentExp])
 
   const handleOnInvalid: () => void = () => {
     setInvalidInput(true)
