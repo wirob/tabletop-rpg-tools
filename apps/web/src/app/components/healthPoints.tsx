@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import {
   Button,
   Box,
@@ -20,19 +21,9 @@ import {
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
-type GetHealthFromLS = () => number | false
-
-const localStorageKey = 'userHealth'
-
-const getHealthFromLS: GetHealthFromLS = () => {
-  const item = localStorage.getItem(localStorageKey)
-
-  if (item !== null) return Number(item)
-  return false
-}
 
 function HealthPoints(): JSX.Element {
-  const [currentHealth, setCurrentHealth] = useState(getHealthFromLS() || 0)
+  const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
   const [healthToSet, setHealthToSet] = useState(0)
 
   const handleHealthChange: HandleHealthChange = (health) => {
@@ -43,10 +34,6 @@ function HealthPoints(): JSX.Element {
     setCurrentHealth(currentHealth + hp)
     setHealthToSet(0)
   }
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(currentHealth))
-  }, [currentHealth])
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
