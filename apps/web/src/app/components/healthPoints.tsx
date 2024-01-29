@@ -22,8 +22,10 @@ type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
 type GetHealthFromLS = () => number | false
 
+const localStorageKey = 'userHealth'
+
 const getHealthFromLS: GetHealthFromLS = () => {
-  const item = localStorage.getItem('userHealth')
+  const item = localStorage.getItem(localStorageKey)
 
   if (item !== null) return Number(item)
   return false
@@ -43,7 +45,7 @@ function HealthPoints(): JSX.Element {
   }
 
   useEffect(() => {
-    localStorage.setItem('userHealth', JSON.stringify(currentHealth))
+    localStorage.setItem(localStorageKey, JSON.stringify(currentHealth))
   }, [currentHealth])
 
   return (
