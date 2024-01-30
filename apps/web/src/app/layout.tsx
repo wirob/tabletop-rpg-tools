@@ -7,8 +7,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Pathfinder tools',
-  description: 'Tools for making Pathfinder moar funz',
+  title: 'TTRPG tools',
+  description: 'Tools for making amy TTRPG moar funz',
 }
 
 export default function RootLayout({
