@@ -1,7 +1,12 @@
 'use client'
 
 import type { PropsWithChildren } from 'react'
-import { ChakraProvider, extendTheme, type ThemeConfig } from '@chakra-ui/react'
+import {
+  ChakraProvider,
+  cookieStorageManagerSSR,
+  extendTheme,
+  type ThemeConfig,
+} from '@chakra-ui/react'
 
 const config: ThemeConfig = {
   initialColorMode: 'dark',
@@ -21,6 +26,15 @@ const theme = extendTheme({
   },
 })
 
-export function ThemeProvider(props: PropsWithChildren): JSX.Element {
-  return <ChakraProvider theme={theme} {...props} />
+export function ThemeProvider({
+  cookies,
+  children,
+}: PropsWithChildren<{ cookies: string }>): JSX.Element {
+  const colorModeManager = cookieStorageManagerSSR(cookies)
+
+  return (
+    <ChakraProvider colorModeManager={colorModeManager} theme={theme}>
+      {children}
+    </ChakraProvider>
+  )
 }
