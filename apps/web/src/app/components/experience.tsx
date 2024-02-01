@@ -23,10 +23,15 @@ export default function Experience(): JSX.Element {
 
   const [expButtonText, setExpButtonText] = useState<ExpButtonText>('Add exp')
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
-  const [invalidInput, setInvalidInput] = useState(false)
+  const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
 
   const handleChange: (exp: number) => void = (exp) => {
+    if (isNaN(exp)) {
+      setInvalidInput(true)
+      return
+    }
+
     setExpToSet(exp)
 
     if (exp <= maxExp) {
