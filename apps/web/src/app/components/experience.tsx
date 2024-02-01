@@ -27,7 +27,7 @@ export default function Experience(): JSX.Element {
   const [expToSet, setExpToSet] = useState(0)
 
   const handleChange: (exp: number) => void = (exp) => {
-    if (!Number.isInteger(exp)) {
+    if (isNaN(exp)) {
       setInvalidInput(true)
       return
     }
