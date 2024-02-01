@@ -27,6 +27,11 @@ export default function Experience(): JSX.Element {
   const [expToSet, setExpToSet] = useState(0)
 
   const handleChange: (exp: number) => void = (exp) => {
+    if (!Number.isInteger(exp)) {
+      setInvalidInput(true)
+      return
+    }
+
     setExpToSet(exp)
 
     if (exp <= maxExp) {
