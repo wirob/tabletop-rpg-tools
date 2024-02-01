@@ -27,6 +27,11 @@ function HealthPoints(): JSX.Element {
   const [healthToSet, setHealthToSet] = useState(0)
 
   const handleHealthChange: HandleHealthChange = (health) => {
+    if (!Number.isInteger(health)) {
+      setHealthToSet(0)
+      return
+    }
+
     setHealthToSet(health)
   }
 
