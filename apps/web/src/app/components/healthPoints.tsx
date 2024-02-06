@@ -18,6 +18,7 @@ import {
   StatNumber,
   StatLabel,
 } from '@repo/ui/chakra'
+import { useToolsVisibility } from '@/context/toolsVisibilityContext'
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
@@ -25,10 +26,7 @@ type HandleButtonClick = (hp: number) => void
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
   const [healthToSet, setHealthToSet] = useState(0)
-  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
-    'toolsVisibility',
-    undefined
-  )
+  const { toolsVisibility } = useToolsVisibility()
 
   const handleHealthChange: HandleHealthChange = (health) => {
     if (!Number.isInteger(health)) {
@@ -44,7 +42,7 @@ function HealthPoints(): JSX.Element | null {
     setHealthToSet(0)
   }
 
-  if (!toolsVisibility || !toolsVisibility.health) return null
+  if (!toolsVisibility.health) return null
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>

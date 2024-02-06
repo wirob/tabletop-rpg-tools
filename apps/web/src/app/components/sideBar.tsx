@@ -21,24 +21,18 @@ import {
   MoonIcon,
   SunIcon,
 } from '@repo/ui/chakra'
-import { useLocalStorage } from 'usehooks-ts'
+import { useToolsVisibility } from '@/context/toolsVisibilityContext'
 
 function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
-  const [toolsVisibility, setToolsVisibility] =
-    useLocalStorage<ToolsVisibility>('toolsVisibility', {
-      actions: true,
-      experience: true,
-      health: true,
-      notes: true,
-    })
+  const { toolsVisibility, setToolsVisibility } = useToolsVisibility()
 
   const handleChange: (name: ToolNames, value: boolean) => void = (
-    name: string,
+    name: ToolNames,
     value: boolean
   ) => {
-    setToolsVisibility((prev) => ({ ...prev, [name]: value }))
+    setToolsVisibility(name, value)
   }
 
   return (

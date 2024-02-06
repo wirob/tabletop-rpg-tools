@@ -2,21 +2,19 @@
 
 import { Textarea } from '@repo/ui/chakra'
 import { useLocalStorage } from 'usehooks-ts'
+import { useToolsVisibility } from '@/context/toolsVisibilityContext'
 
 type HandleInputChange = (text: string) => void
 
 function Notes(): JSX.Element | null {
   const [notes, setNotes] = useLocalStorage('notes', '')
-  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
-    'toolsVisibility',
-    undefined
-  )
+  const { toolsVisibility } = useToolsVisibility()
 
   const handleInputChange: HandleInputChange = (text: string) => {
     setNotes(text)
   }
 
-  if (!toolsVisibility || !toolsVisibility.notes) return null
+  if (!toolsVisibility.notes) return null
   return (
     <div className="mt-4">
       <Textarea
