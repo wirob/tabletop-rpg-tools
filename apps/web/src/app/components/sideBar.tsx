@@ -16,15 +16,27 @@ import {
   Switch,
   useDisclosure,
 } from '@repo/ui/chakra'
-import { useToggle } from 'usehooks-ts'
 import { useLocalStorage } from 'usehooks-ts'
+
+type ToolNames = 'health' | 'notes' | 'experience'
+
+type ToolsVisibility = { [keyof in ToolNames]: boolean }
 
 function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [healthToolVisibility, setHealthToolVisibility] = useLocalStorage(
-    'healthToolVisibility',
-    true
-  )
+  const [toolsVisibility, setToolsVisibility] =
+    useLocalStorage<ToolsVisibility>('toolsVisibility', {
+      health: true,
+      notes: true,
+      experience: true,
+    })
+
+  const handleChange: (name: ToolNames, value: boolean) => void = (
+    name: string,
+    value: boolean
+  ) => {
+    setToolsVisibility((prev) => ({ ...prev, [name]: value }))
+  }
 
   return (
     <>
@@ -47,17 +59,35 @@ function SideBar(): JSX.Element {
               <Flex>
                 <FormLabel htmlFor="health-tool">Health</FormLabel>
                 <Spacer />
-                <Switch id="health-tool" />
+                <Switch
+                  id="health-tool"
+                  isChecked={toolsVisibility.health}
+                  onChange={(event) => {
+                    handleChange('health', event.currentTarget.checked)
+                  }}
+                />
               </Flex>
               <Flex>
                 <FormLabel htmlFor="experience-tool">Experience</FormLabel>
                 <Spacer />
-                <Switch id="experience-tool" />
+                <Switch
+                  id="experience-tool"
+                  isChecked={toolsVisibility.experience}
+                  onChange={(event) => {
+                    handleChange('experience', event.currentTarget.checked)
+                  }}
+                />
               </Flex>
               <Flex>
                 <FormLabel htmlFor="notes-tool">Notes</FormLabel>
                 <Spacer />
-                <Switch id="notes-tool" />
+                <Switch
+                  id="notes-tool"
+                  isChecked={toolsVisibility.notes}
+                  onChange={(event) => {
+                    handleChange('notes', event.currentTarget.checked)
+                  }}
+                />
               </Flex>
             </FormControl>
           </DrawerBody>
