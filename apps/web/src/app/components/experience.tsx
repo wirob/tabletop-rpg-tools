@@ -15,6 +15,7 @@ import {
   StatLabel,
   StatNumber,
 } from '@repo/ui/chakra'
+import { useToolsVisibility } from '@/context/toolsVisibilityContext'
 
 type ExpButtonText = 'Add exp' | 'Remove exp'
 
@@ -25,10 +26,7 @@ export default function Experience(): JSX.Element | null {
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
-  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
-    'toolsVisibility',
-    undefined
-  )
+  const { toolsVisibility } = useToolsVisibility()
 
   const handleChange: (exp: number) => void = (exp) => {
     if (isNaN(exp)) {
@@ -56,7 +54,7 @@ export default function Experience(): JSX.Element | null {
     setCurrentExp(currentExp + expToSet)
   }
 
-  if (!toolsVisibility || !toolsVisibility.experience) return null
+  if (!toolsVisibility.experience) return null
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
