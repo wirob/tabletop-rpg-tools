@@ -65,17 +65,6 @@ function SideBar(): JSX.Element {
                 />
               </Flex>
               <Flex>
-                <FormLabel htmlFor="health-tool">Health</FormLabel>
-                <Spacer />
-                <Switch
-                  id="health-tool"
-                  isChecked={toolsVisibility.health}
-                  onChange={(event) => {
-                    handleChange('health', event.currentTarget.checked)
-                  }}
-                />
-              </Flex>
-              <Flex>
                 <FormLabel htmlFor="experience-tool">Experience</FormLabel>
                 <Spacer />
                 <Switch
@@ -83,6 +72,17 @@ function SideBar(): JSX.Element {
                   isChecked={toolsVisibility.experience}
                   onChange={(event) => {
                     handleChange('experience', event.currentTarget.checked)
+                  }}
+                />
+              </Flex>
+              <Flex>
+                <FormLabel htmlFor="health-tool">Health</FormLabel>
+                <Spacer />
+                <Switch
+                  id="health-tool"
+                  isChecked={toolsVisibility.health}
+                  onChange={(event) => {
+                    handleChange('health', event.currentTarget.checked)
                   }}
                 />
               </Flex>
