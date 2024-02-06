@@ -9,12 +9,13 @@ import {
   DoubleAction as DoubleActionIcon,
 } from '@repo/ui/icons'
 import { Button, IconButton } from '@repo/ui/chakra'
+import { useLocalStorage } from 'usehooks-ts'
 
 type ActionsAvailable = {
   [key in Action]: boolean
 }
 
-export default function Actions(): JSX.Element {
+export default function Actions(): JSX.Element | null {
   const [actionsUsed, setActionsUsed] = useState(0)
   const [actions, setActions] = useState<ActionsAvailable>({
     free: false,
@@ -23,6 +24,10 @@ export default function Actions(): JSX.Element {
     triple: false,
     reaction: false,
   })
+  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
+    'toolsVisibility',
+    undefined
+  )
 
   const handleClick: (action: Action, cost: number) => void = (
     action,
@@ -50,6 +55,8 @@ export default function Actions(): JSX.Element {
     })
     setActionsUsed(0)
   }
+
+  if (!toolsVisibility || !toolsVisibility.actions) return null
 
   return (
     <div className="grid gap-2 grid-cols-6 mt-4">

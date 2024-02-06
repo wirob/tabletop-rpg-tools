@@ -26,9 +26,10 @@ function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [toolsVisibility, setToolsVisibility] =
     useLocalStorage<ToolsVisibility>('toolsVisibility', {
+      actions: true,
+      experience: true,
       health: true,
       notes: true,
-      experience: true,
     })
 
   const handleChange: (name: ToolNames, value: boolean) => void = (
@@ -56,6 +57,17 @@ function SideBar(): JSX.Element {
 
           <DrawerBody>
             <FormControl>
+              <Flex>
+                <FormLabel htmlFor="actions-tool">Actions</FormLabel>
+                <Spacer />
+                <Switch
+                  id="actions-tool"
+                  isChecked={toolsVisibility.actions}
+                  onChange={(event) => {
+                    handleChange('actions', event.currentTarget.checked)
+                  }}
+                />
+              </Flex>
               <Flex>
                 <FormLabel htmlFor="health-tool">Health</FormLabel>
                 <Spacer />

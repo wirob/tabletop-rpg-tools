@@ -22,9 +22,13 @@ import {
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
 
-function HealthPoints(): JSX.Element {
+function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
   const [healthToSet, setHealthToSet] = useState(0)
+  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
+    'toolsVisibility',
+    undefined
+  )
 
   const handleHealthChange: HandleHealthChange = (health) => {
     if (!Number.isInteger(health)) {
@@ -39,6 +43,8 @@ function HealthPoints(): JSX.Element {
     setCurrentHealth(currentHealth + hp)
     setHealthToSet(0)
   }
+
+  if (!toolsVisibility || !toolsVisibility.health) return null
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
