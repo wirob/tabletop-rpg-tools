@@ -18,10 +18,6 @@ import {
 } from '@repo/ui/chakra'
 import { useLocalStorage } from 'usehooks-ts'
 
-type ToolNames = 'health' | 'notes' | 'experience'
-
-type ToolsVisibility = { [keyof in ToolNames]: boolean }
-
 function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [toolsVisibility, setToolsVisibility] =
