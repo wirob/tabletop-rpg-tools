@@ -1,8 +1,10 @@
 'use client'
 
 import {
+  Button,
   Drawer,
   DrawerBody,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -14,12 +16,16 @@ import {
   SettingsIcon,
   Spacer,
   Switch,
+  useColorMode,
   useDisclosure,
+  MoonIcon,
+  SunIcon,
 } from '@repo/ui/chakra'
 import { useLocalStorage } from 'usehooks-ts'
 
 function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { colorMode, toggleColorMode } = useColorMode()
   const [toolsVisibility, setToolsVisibility] =
     useLocalStorage<ToolsVisibility>('toolsVisibility', {
       actions: true,
@@ -99,6 +105,15 @@ function SideBar(): JSX.Element {
               </Flex>
             </FormControl>
           </DrawerBody>
+          <DrawerFooter>
+            <Button
+              aria-label="toggle color mode"
+              leftIcon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+            >
+              Toggle {colorMode === 'light' ? 'Dark' : 'Light'} theme
+            </Button>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
