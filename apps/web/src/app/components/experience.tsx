@@ -18,13 +18,17 @@ import {
 
 type ExpButtonText = 'Add exp' | 'Remove exp'
 
-export default function Experience(): JSX.Element {
+export default function Experience(): JSX.Element | null {
   const maxExp = 999
 
   const [expButtonText, setExpButtonText] = useState<ExpButtonText>('Add exp')
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
+  const [toolsVisibility] = useLocalStorage<ToolsVisibility | undefined>(
+    'toolsVisibility',
+    undefined
+  )
 
   const handleChange: (exp: number) => void = (exp) => {
     if (isNaN(exp)) {
@@ -51,6 +55,8 @@ export default function Experience(): JSX.Element {
   const handleAddExp: () => void = () => {
     setCurrentExp(currentExp + expToSet)
   }
+
+  if (!toolsVisibility || !toolsVisibility.experience) return null
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
