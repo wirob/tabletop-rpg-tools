@@ -9,7 +9,7 @@ import {
   DoubleAction as DoubleActionIcon,
 } from '@repo/ui/icons'
 import { Button, IconButton } from '@repo/ui/chakra'
-import { useToolsVisibility } from '@/context/toolsVisibilityContext'
+import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 type ActionsAvailable = {
   [key in Action]: boolean

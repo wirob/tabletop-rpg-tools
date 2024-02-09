@@ -18,7 +18,7 @@ import {
   StatNumber,
   StatLabel,
 } from '@repo/ui/chakra'
-import { useToolsVisibility } from '@/context/toolsVisibilityContext'
+import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void

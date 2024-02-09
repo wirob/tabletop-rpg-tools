@@ -3,13 +3,13 @@ import '@repo/ui/styles.css'
 import { type Metadata } from 'next'
 import { cookies } from 'next/headers'
 import { Inter } from 'next/font/google'
-import { Providers } from './providers'
+import { Providers } from '@/app/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'TTRPG tools',
-  description: 'Tools for making amy TTRPG moar funz',
+  description: 'Tools for making any TTRPG moar funz',
 }
 
 export default function RootLayout({

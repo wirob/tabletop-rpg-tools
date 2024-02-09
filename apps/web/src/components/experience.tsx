@@ -15,7 +15,7 @@ import {
   StatLabel,
   StatNumber,
 } from '@repo/ui/chakra'
-import { useToolsVisibility } from '@/context/toolsVisibilityContext'
+import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 type ExpButtonText = 'Add exp' | 'Remove exp'
 

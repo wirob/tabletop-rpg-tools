@@ -21,7 +21,7 @@ import {
   MoonIcon,
   SunIcon,
 } from '@repo/ui/chakra'
-import { useToolsVisibility } from '@/context/toolsVisibilityContext'
+import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 function SideBar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
