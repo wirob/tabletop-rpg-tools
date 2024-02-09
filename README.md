@@ -1,14 +1,5 @@
-# Turborepo Tailwind CSS starter
-
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+# Tabletop RPG Tools🧰🛠️
+(hopefully) the last tool that you'll need for your rpg adventure🦄
 
 ## What's inside?
 
@@ -16,11 +7,11 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
 - `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
+- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) use by `web` app
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@repo/tailwind-config`: `tailwind-config` configuration file for [Tailwind CSS](https://tailwindcss.com/)
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -32,21 +23,6 @@ This example is set up to produce compiled styles for `ui` components into the `
 - Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
 - Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
 - Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.js` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
-
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
 
 ### Utilities
 
