@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@repo/ui/theme'
 import { cookies } from 'next/headers'
-import { ToolsVisibilityProvider } from '@/context/toolsVisibilityContext'
+import { ToolsVisibilityProvider } from '@/app/context/toolsVisibilityContext'
 
 export function Providers({
   children,
