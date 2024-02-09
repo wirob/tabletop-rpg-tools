@@ -41,7 +41,7 @@ This monorepo uses [PNPM](https://pnpm.io) since [Bun](https://bun.sh/) still is
 Read on how to install `PNPM` in their [official docs](https://pnpm.io/installation).
 
 ## How to run
-
+In the root of the project, run:
 ``` bash
 pnpm dev
 ```
