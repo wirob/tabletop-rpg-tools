@@ -2,7 +2,7 @@
 
 import { Textarea } from '@repo/ui/chakra'
 import { useLocalStorage } from 'usehooks-ts'
-import { useToolsVisibility } from '@/context/toolsVisibilityContext'
+import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 type HandleInputChange = (text: string) => void
 
