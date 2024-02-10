@@ -1,7 +1,7 @@
 import sharedConfig from "@repo/tailwind-config";
 
 const config = {
-  content: ["./src/app/**/*.tsx"],
+  content: ["./src/**/*.tsx"],
   presets: [sharedConfig],
 };
 
