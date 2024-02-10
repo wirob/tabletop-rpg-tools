@@ -25,6 +25,7 @@ type HandleButtonClick = (hp: number) => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
+  const [healthMax] = useLocalStorage('userHealthMax', 10)
   const [healthToSet, setHealthToSet] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
 
@@ -47,7 +48,9 @@ function HealthPoints(): JSX.Element | null {
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
       <Stat>
-        <StatNumber>{currentHealth} / max</StatNumber>
+        <StatNumber>
+          {currentHealth}/{healthMax}
+        </StatNumber>
         <StatLabel>Health</StatLabel>
       </Stat>
       <Box flex="1">
