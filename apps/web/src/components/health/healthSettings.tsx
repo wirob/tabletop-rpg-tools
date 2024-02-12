@@ -24,6 +24,9 @@ interface HealthSettingsProps {
   setHealthMax: (max: number) => void
 }
 
+type HandleChange = (val: number) => void
+type HandleSave = () => void
+
 function HealthSettings(props: HealthSettingsProps): JSX.Element {
   const { healthMax, setHealthMax } = props
   const { isOpen, onToggle, onClose } = useDisclosure()
@@ -31,7 +34,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   const [invalid, setInvalid] = useState(false)
   const [disabled, setDisabled] = useState(true)
 
-  const handleChange: (val: number) => void = (val) => {
+  const handleChange: HandleChange = (val) => {
     if (isNaN(val) || !Number.isInteger(val)) {
       setInvalid(true)
       setDisabled(true)
@@ -43,7 +46,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
     setNewHealthMax(val)
   }
 
-  const handleSave: () => void = () => {
+  const handleSave: HandleSave = () => {
     setHealthMax(newHealthMax)
     onToggle()
   }
