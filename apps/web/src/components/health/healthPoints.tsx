@@ -6,25 +6,25 @@ import {
   Button,
   Box,
   Center,
-  IconButton,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  SettingsIcon,
   SimpleGrid,
   Stat,
   StatNumber,
   StatLabel,
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
+import HealthSettings from './healthSettings'
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
+  const [healthMax, setHealthMax] = useLocalStorage('userHealthMax', 0)
   const [healthToSet, setHealthToSet] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
 
@@ -42,18 +42,25 @@ function HealthPoints(): JSX.Element | null {
     setHealthToSet(0)
   }
 
+  const handleSetHealthMax: (val: number) => void = (val) => {
+    setHealthMax(val)
+  }
+
   if (!toolsVisibility.health) return null
 
   return (
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
       <Stat>
-        <StatNumber>{currentHealth} / max</StatNumber>
+        <StatNumber>
+          {currentHealth} / {healthMax}
+        </StatNumber>
         <StatLabel>Health</StatLabel>
       </Stat>
       <Box flex="1">
-        <IconButton aria-label="health settings" size="xs">
-          <SettingsIcon />
-        </IconButton>
+        <HealthSettings
+          healthMax={healthMax}
+          setHealthMax={handleSetHealthMax}
+        />
       </Box>
 
       <Center>
