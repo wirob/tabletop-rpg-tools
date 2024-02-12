@@ -49,7 +49,7 @@ function HealthPoints(): JSX.Element | null {
     <SimpleGrid className="mt-4" columns={3} spacing={2}>
       <Stat>
         <StatNumber>
-          {currentHealth}/{healthMax}
+          {currentHealth} / {healthMax}
         </StatNumber>
         <StatLabel>Health</StatLabel>
       </Stat>
