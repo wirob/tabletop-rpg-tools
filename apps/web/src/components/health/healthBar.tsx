@@ -38,7 +38,6 @@ function HealthBar(props: HealthBarProps): JSX.Element {
         height='10%'
         position="absolute"
         style={{
-          zIndex: 10,
           backgroundImage: `linear-gradient(
             45deg,
             ${color} 25%,
