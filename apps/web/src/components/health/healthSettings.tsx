@@ -54,7 +54,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   return (
     <Popover isOpen={isOpen} onClose={onClose} placement="right-start">
       <PopoverTrigger>
-        <IconButton aria-label="health settings" onClick={onToggle} size="xs">
+        <IconButton aria-label="health settings" isRound onClick={onToggle} size="xs">
           <SettingsIcon />
         </IconButton>
       </PopoverTrigger>
