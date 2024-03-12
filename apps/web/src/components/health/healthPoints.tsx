@@ -1,17 +1,18 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import {
-  Button,
   Box,
-  Center,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  SimpleGrid,
   Stat,
   StatNumber,
   StatLabel,
@@ -61,62 +62,81 @@ function HealthPoints(): JSX.Element | null {
   if (!toolsVisibility.health) return null
 
   return (
-    <SimpleGrid className="mt-4" columns={3} spacing={2}>
-      <Stat>
-        <StatNumber>
-          {currentHealth} / {healthMax}
-        </StatNumber>
-        <StatLabel>Health</StatLabel>
-      </Stat>
-      <Box flex="1">
-        <HealthSettings
-          healthMax={healthMax}
-          setHealthMax={handleSetHealthMax}
-        />
+    <Grid gap={4} templateColumns="repeat(2, 1fr)">
+      {/* current health */}
+      <GridItem>
+        <Flex h="100%" justifyContent="space-between">
+          <Box>
+            <Stat>
+              <StatNumber>
+                {currentHealth} / {healthMax}
+              </StatNumber>
+              <StatLabel>Health</StatLabel>
+            </Stat>
+          </Box>
+          <HealthSettings
+            healthMax={healthMax}
+            setHealthMax={handleSetHealthMax}
+          />
           <HealthBar health={healthPercentage} />
+        </Flex>
+      </GridItem>
 
-      <Center>
-        <NumberInput
-          inputMode="numeric"
-          maxW={20}
-          min={0}
-          onChange={(_, valueAsNumber) => {
-            handleHealthChange(valueAsNumber)
-          }}
-          size="lg"
-          step={1}
-          value={healthToSet}
+      {/* input field */}
+      <GridItem>
+        <Flex gap={2}>
+          <NumberInput
+            inputMode="numeric"
+            min={0}
+            onChange={(_, valueAsNumber) => {
+              handleHealthChange(valueAsNumber)
+            }}
+            size="lg"
+            step={1}
+            value={healthToSet}
+            width={48}
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </Flex>
+
+        {/* buttons */}
+        <Flex
+          gap={2}
+          justifyContent="space-between"
+          marginBottom={2}
+          marginTop={2}
         >
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        </NumberInput>
-      </Center>
-      <Button
-        colorScheme="green"
-        onClick={() => {
-          handleButtonClick(healthToSet)
-        }}
-        size="xs"
-      >
-        Heal
-      </Button>
-      <Button
-        colorScheme="red"
-        onClick={() => {
-          handleButtonClick(-healthToSet)
-        }}
-        size="xs"
-      >
-        Damage
-      </Button>
+          <Button
+            colorScheme="green"
+            onClick={() => {
+              handleButtonClick(healthToSet)
+            }}
+            width="50%"
+          >
+            Heal
+          </Button>
+          <Button
+            colorScheme="red"
+            onClick={() => {
+              handleButtonClick(-healthToSet)
+            }}
+            width="50%"
+          >
+            Damage
+          </Button>
+        </Flex>
         <Flex>
           <Button onClick={handleFullHealthClick} width={48}>
             Full heal
           </Button>
         </Flex>
+      </GridItem>
+    </Grid>
   )
 }
 
