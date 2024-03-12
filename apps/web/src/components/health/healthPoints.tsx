@@ -28,6 +28,7 @@ function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
   const [healthMax, setHealthMax] = useLocalStorage('userHealthMax', 0)
   const [healthToSet, setHealthToSet] = useState(0)
+  const [healthPercentage, setHealthPercentage] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
 
   const handleHealthChange: HandleHealthChange = (health) => {
@@ -52,6 +53,9 @@ function HealthPoints(): JSX.Element | null {
     setCurrentHealth(healthMax)
   }
 
+  useEffect(() => {
+    setHealthPercentage((currentHealth / healthMax) * 100)
+  }, [healthMax, currentHealth])
 
   if (!toolsVisibility.health) return null
 
