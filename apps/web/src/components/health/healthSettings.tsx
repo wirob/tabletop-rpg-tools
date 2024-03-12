@@ -17,7 +17,7 @@ import {
   SettingsIcon,
   useDisclosure,
 } from '@repo/ui/chakra'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface HealthSettingsProps {
   healthMax: number
@@ -41,6 +41,14 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   const [maxHealthInvalid, setMaxHealthInvalid] = useState(false)
   const [tempHealthInvalid, setTempHealthInvalid] = useState(false)
   const [disabled, setDisabled] = useState(true)
+
+  useEffect(() => {
+    setNewHealthMax(healthMax)
+  }, [healthMax])
+
+  useEffect(() => {
+    setNewTempHealth(tempHealth)
+  }, [tempHealth])
 
   const handleChange: HandleChange = (
     val,
@@ -96,7 +104,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
             </NumberInput>
             <FormLabel>Temp HP</FormLabel>
             <NumberInput
-              defaultValue={newTempHealth}
               isInvalid={tempHealthInvalid}
               min={1}
               onChange={(_, valAsNumber) => {
@@ -106,6 +113,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
                   setNewTempHealth
                 )
               }}
+              value={newTempHealth}
             >
               <NumberInputField />
               <NumberInputStepper>
