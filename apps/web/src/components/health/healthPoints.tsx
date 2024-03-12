@@ -62,7 +62,7 @@ function HealthPoints(): JSX.Element | null {
   if (!toolsVisibility.health) return null
 
   return (
-    <Grid gap={4} templateColumns="repeat(2, 1fr)">
+    <Grid gap={4} margin={8} templateColumns="repeat(2, 1fr)">
       {/* current health */}
       <GridItem>
         <Flex h="100%" justifyContent="space-between">
