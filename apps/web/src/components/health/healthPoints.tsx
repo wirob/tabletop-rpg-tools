@@ -18,6 +18,7 @@ import {
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 import HealthSettings from './healthSettings'
+import HealthBar from './healthBar'
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
@@ -72,7 +73,7 @@ function HealthPoints(): JSX.Element | null {
           healthMax={healthMax}
           setHealthMax={handleSetHealthMax}
         />
-      </Box>
+          <HealthBar health={healthPercentage} />
 
       <Center>
         <NumberInput
