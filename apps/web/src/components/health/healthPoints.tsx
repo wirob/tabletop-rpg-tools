@@ -21,6 +21,7 @@ import HealthSettings from './healthSettings'
 
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
+type HandleSetHealthMax = (val: number) => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
@@ -42,7 +43,7 @@ function HealthPoints(): JSX.Element | null {
     setHealthToSet(0)
   }
 
-  const handleSetHealthMax: (val: number) => void = (val) => {
+  const handleSetHealthMax: HandleSetHealthMax = (val) => {
     setHealthMax(val)
   }
 
