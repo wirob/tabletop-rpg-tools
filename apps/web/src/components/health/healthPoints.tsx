@@ -78,7 +78,7 @@ function HealthPoints(): JSX.Element | null {
             healthMax={healthMax}
             setHealthMax={handleSetHealthMax}
           />
-          <HealthBar health={healthPercentage} />
+          <HealthBar health={healthPercentage} temp={tempHealthPercentage} />
         </Flex>
       </GridItem>
 

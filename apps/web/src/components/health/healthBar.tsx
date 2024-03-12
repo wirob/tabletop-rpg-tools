@@ -2,11 +2,12 @@ import { Box, useColorModeValue } from '@repo/ui/chakra'
 import { useState, useEffect } from 'react'
 
 interface HealthBarProps {
-  health: number // in percentage
+  health: number
+  temp: number
 }
 
 function HealthBar(props: HealthBarProps): JSX.Element {
-  const { health } = props
+  const { health, temp } = props
 
   const [healthBarColor, setHealthBarColor] = useState<string>()
 
@@ -35,7 +36,7 @@ function HealthBar(props: HealthBarProps): JSX.Element {
       />
       <Box
         bottom="0"
-        height='10%'
+        height={`${temp}%`}
         position="absolute"
         style={{
           backgroundImage: `linear-gradient(
