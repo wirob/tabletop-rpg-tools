@@ -22,6 +22,7 @@ import HealthSettings from './healthSettings'
 type HandleHealthChange = (health: number) => void
 type HandleButtonClick = (hp: number) => void
 type HandleSetHealthMax = (val: number) => void
+type HandleFullHealthClick = () => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
@@ -46,6 +47,11 @@ function HealthPoints(): JSX.Element | null {
   const handleSetHealthMax: HandleSetHealthMax = (val) => {
     setHealthMax(val)
   }
+
+  const handleFullHealthClick: HandleFullHealthClick = () => {
+    setCurrentHealth(healthMax)
+  }
+
 
   if (!toolsVisibility.health) return null
 
@@ -101,7 +107,11 @@ function HealthPoints(): JSX.Element | null {
       >
         Damage
       </Button>
-    </SimpleGrid>
+        <Flex>
+          <Button onClick={handleFullHealthClick} width={48}>
+            Full heal
+          </Button>
+        </Flex>
   )
 }
 
