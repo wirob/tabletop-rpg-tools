@@ -1,4 +1,4 @@
-import { Box, Flex, useColorModeValue } from '@repo/ui/chakra'
+import { Box, useColorModeValue } from '@repo/ui/chakra'
 import { useState, useEffect } from 'react'
 
 interface HealthBarProps {
@@ -21,18 +21,39 @@ function HealthBar(props: HealthBarProps): JSX.Element {
     else setHealthBarColor(green)
   }, [health, setHealthBarColor, red, green, orange])
 
+  const size = '1rem'
+  const color = 'rgba(255, 255, 255, 0.8)'
+
   return (
-    <Flex alignItems="end" bg={grey} height="100%" width="32px">
+    <Box bg={grey} height="100%" position="relative" width={8}>
       <Box
         bg={healthBarColor}
-        style={{
-          height: `${health}%`,
-          width: 32,
-          top: 0,
-          position: 'relative',
-        }}
+        bottom="0"
+        height={`${health}%`}
+        position="absolute"
+        width={8}
       />
-    </Flex>
+      <Box
+        bottom="0"
+        height='10%'
+        position="absolute"
+        style={{
+          zIndex: 10,
+          backgroundImage: `linear-gradient(
+            45deg,
+            ${color} 25%,
+            transparent 25%,
+            transparent 50%,
+            ${color} 50%,
+            ${color} 75%,
+            transparent 75%,
+            transparent
+          )`,
+          backgroundSize: `${size} ${size}`,
+        }}
+        width={8}
+      />
+    </Box>
   )
 }
 
