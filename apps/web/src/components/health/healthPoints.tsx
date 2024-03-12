@@ -22,13 +22,15 @@ import HealthSettings from './healthSettings'
 import HealthBar from './healthBar'
 
 type HandleHealthChange = (health: number) => void
-type HandleButtonClick = (hp: number) => void
+type HandleHeal = (hp: number) => void
+type HandleDamage = (dmg: number) => void
 type HandleSetHealthMax = (val: number) => void
 type HandleFullHealthClick = () => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
   const [healthMax, setHealthMax] = useLocalStorage('userHealthMax', 0)
+  const [tempHealth, setTempHealth] = useLocalStorage('userHealthTemp', 0)
   const [healthToSet, setHealthToSet] = useState(0)
   const [healthPercentage, setHealthPercentage] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
@@ -42,8 +44,19 @@ function HealthPoints(): JSX.Element | null {
     setHealthToSet(health)
   }
 
-  const handleButtonClick: HandleButtonClick = (hp) => {
+  const handleHeal: HandleHeal = (hp) => {
     setCurrentHealth(currentHealth + hp)
+    setHealthToSet(0)
+  }
+
+  const handleDamage: HandleDamage = (dmg) => {
+    if (dmg > tempHealth) {
+      setCurrentHealth(currentHealth + (tempHealth - dmg))
+      setTempHealth(0)
+    } else {
+      setTempHealth(tempHealth - dmg)
+    }
+
     setHealthToSet(0)
   }
 
@@ -114,7 +127,7 @@ function HealthPoints(): JSX.Element | null {
           <Button
             colorScheme="green"
             onClick={() => {
-              handleButtonClick(healthToSet)
+              handleHeal(healthToSet)
             }}
             width="50%"
           >
@@ -123,7 +136,7 @@ function HealthPoints(): JSX.Element | null {
           <Button
             colorScheme="red"
             onClick={() => {
-              handleButtonClick(-healthToSet)
+              handleDamage(healthToSet)
             }}
             width="50%"
           >
