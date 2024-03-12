@@ -47,7 +47,9 @@ function HealthPoints(): JSX.Element | null {
   }
 
   const handleHeal: HandleHeal = (hp) => {
-    setCurrentHealth(currentHealth + hp)
+    if (hp >= healthMax) setCurrentHealth(healthMax)
+    else if(hp >= (healthMax - currentHealth)) setCurrentHealth(healthMax)
+    else setCurrentHealth(currentHealth + hp)
     setHealthToSet(0)
   }
 
