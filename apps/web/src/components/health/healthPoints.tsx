@@ -16,6 +16,7 @@ import {
   Stat,
   StatNumber,
   StatLabel,
+  Spacer,
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 import HealthSettings from './healthSettings'
@@ -83,7 +84,7 @@ function HealthPoints(): JSX.Element | null {
     <Grid gap={4} margin={8} templateColumns="repeat(2, 1fr)">
       {/* current health */}
       <GridItem>
-        <Flex h="100%" justifyContent="space-between">
+        <Flex h="100%">
           <Box>
             <Stat>
               <StatNumber>
@@ -98,6 +99,7 @@ function HealthPoints(): JSX.Element | null {
             setTempHealth={setTempHealth}
             tempHealth={tempHealth}
           />
+          <Spacer />
           <HealthBar health={healthPercentage} temp={tempHealthPercentage} />
         </Flex>
       </GridItem>
