@@ -31,6 +31,7 @@ function HealthBar(props: HealthBarProps): JSX.Element {
         bg={healthBarColor}
         bottom="0"
         height={`${health}%`}
+        maxHeight="100%"
         position="absolute"
         transitionDuration="300ms"
         transitionProperty="all"
@@ -50,6 +51,7 @@ function HealthBar(props: HealthBarProps): JSX.Element {
         backgroundSize={`${size} ${size}`}
         bottom="0"
         height={`${temp}%`}
+        maxHeight="100%"
         position="absolute"
         transitionDuration="300ms"
         transitionProperty="all"
