@@ -28,7 +28,6 @@ interface HealthSettingsProps {
 
 type HandleChange = (
   val: number,
-  onInvalidCallback: (val: boolean) => void,
   setValueCallback: (val: number) => void
 ) => void
 type HandleSave = () => void
@@ -38,9 +37,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   const { isOpen, onToggle, onClose } = useDisclosure()
   const [newHealthMax, setNewHealthMax] = useState(healthMax)
   const [newTempHealth, setNewTempHealth] = useState(tempHealth)
-  const [maxHealthInvalid, setMaxHealthInvalid] = useState(false)
-  const [tempHealthInvalid, setTempHealthInvalid] = useState(false)
-  const [disabled, setDisabled] = useState(true)
 
   useEffect(() => {
     setNewHealthMax(healthMax)
@@ -52,18 +48,13 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
 
   const handleChange: HandleChange = (
     val,
-    onInvalidCallback,
     setValueCallback
   ) => {
     if (isNaN(val) || !Number.isInteger(val)) {
-      onInvalidCallback(true)
       setValueCallback(0)
-      setDisabled(true)
       return
     }
 
-    onInvalidCallback(false)
-    setDisabled(false)
     setValueCallback(val)
   }
 
@@ -90,10 +81,9 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
           <FormControl>
             <FormLabel>Max HP</FormLabel>
             <NumberInput
-              isInvalid={maxHealthInvalid}
               min={0}
               onChange={(_, valAsNumber) => {
-                handleChange(valAsNumber, setMaxHealthInvalid, setNewHealthMax)
+                handleChange(valAsNumber, setNewHealthMax)
               }}
               value={newHealthMax}
             >
@@ -105,12 +95,10 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
             </NumberInput>
             <FormLabel>Temp HP</FormLabel>
             <NumberInput
-              isInvalid={tempHealthInvalid}
               min={0}
               onChange={(_, valAsNumber) => {
                 handleChange(
                   valAsNumber,
-                  setTempHealthInvalid,
                   setNewTempHealth
                 )
               }}
@@ -129,7 +117,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
             <Button onClick={onClose}>Cancel</Button>
             <Button
               colorScheme="green"
-              isDisabled={disabled}
               onClick={handleSave}
             >
               Save
