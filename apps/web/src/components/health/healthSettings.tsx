@@ -105,7 +105,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
             <FormLabel>Temp HP</FormLabel>
             <NumberInput
               isInvalid={tempHealthInvalid}
-              max={healthMax}
               min={0}
               onChange={(_, valAsNumber) => {
                 handleChange(
