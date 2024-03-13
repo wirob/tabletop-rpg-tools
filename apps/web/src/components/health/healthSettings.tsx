@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
 
 interface HealthSettingsProps {
   healthMax: number
+  setCurrentHealth: (hp: number) => void
   setHealthMax: (hp: number) => void
   setTempHealth: (hp: number) => void
   tempHealth: number
@@ -33,7 +34,13 @@ type HandleChange = (
 type HandleSave = () => void
 
 function HealthSettings(props: HealthSettingsProps): JSX.Element {
-  const { healthMax, setHealthMax, setTempHealth, tempHealth } = props
+  const {
+    healthMax,
+    setCurrentHealth,
+    setHealthMax,
+    setTempHealth,
+    tempHealth,
+  } = props
   const { isOpen, onToggle, onClose } = useDisclosure()
   const [newHealthMax, setNewHealthMax] = useState(healthMax)
   const [newTempHealth, setNewTempHealth] = useState(tempHealth)

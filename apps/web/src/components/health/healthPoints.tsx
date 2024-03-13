@@ -105,6 +105,7 @@ function HealthPoints(): JSX.Element | null {
           </Flex>
           <HealthSettings
             healthMax={healthMax}
+            setCurrentHealth={setCurrentHealth}
             setHealthMax={handleSetHealthMax}
             setTempHealth={setTempHealth}
             tempHealth={tempHealth}
