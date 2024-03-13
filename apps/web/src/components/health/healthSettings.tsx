@@ -70,6 +70,8 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
     setTempHealth(newTempHealth)
 
     if (healthMax === 0) setCurrentHealth(newHealthMax)
+    if (newHealthMax < healthMax) setCurrentHealth(newHealthMax)
+
     onToggle()
   }
 
