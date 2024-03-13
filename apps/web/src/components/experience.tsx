@@ -18,8 +18,6 @@ import {
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 export default function Experience(): JSX.Element | null {
-  const maxExp = 999
-
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
@@ -32,10 +30,6 @@ export default function Experience(): JSX.Element | null {
     }
 
     setExpToSet(exp)
-
-    if (exp <= maxExp) {
-      setInvalidInput(false)
-    }
   }
 
   const handleOnInvalid: () => void = () => {
@@ -59,7 +53,6 @@ export default function Experience(): JSX.Element | null {
           clampValueOnBlur={false}
           inputMode="numeric"
           keepWithinRange={false}
-          max={maxExp}
           maxW={20}
           onChange={(_, valueAsNumber) => {
             handleChange(valueAsNumber)
