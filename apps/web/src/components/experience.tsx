@@ -27,17 +27,8 @@ export default function Experience(): JSX.Element | null {
   const { toolsVisibility } = useToolsVisibility()
 
   const handleChange: (exp: number) => void = (exp) => {
-    if (isNaN(exp)) {
-      setInvalidInput(true)
-      return
-    }
-
-    setInvalidInput(false)
-    setExpToSet(exp)
-  }
-
-  const handleOnInvalid: () => void = () => {
-    setInvalidInput(true)
+    if (isNaN(exp)) setExpToSet(0)
+    else setExpToSet(exp)
   }
 
   const handleAddExp: () => void = () => {
@@ -45,8 +36,12 @@ export default function Experience(): JSX.Element | null {
 
     setCurrentExp(currentExp + expToSet)
     setExpToSet(0)
-    setInvalidInput(true)
   }
+
+  useEffect(() => {
+    if (expToSet === 0) setInvalidInput(true)
+    else setInvalidInput(false)
+  }, [setInvalidInput, expToSet])
 
   if (!toolsVisibility.experience) return null
 
