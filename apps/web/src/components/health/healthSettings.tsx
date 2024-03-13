@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react'
 
 interface HealthSettingsProps {
   healthMax: number
+  setCurrentHealth: (hp: number) => void
   setHealthMax: (hp: number) => void
   setTempHealth: (hp: number) => void
   tempHealth: number
@@ -33,7 +34,13 @@ type HandleChange = (
 type HandleSave = () => void
 
 function HealthSettings(props: HealthSettingsProps): JSX.Element {
-  const { healthMax, setHealthMax, setTempHealth, tempHealth } = props
+  const {
+    healthMax,
+    setCurrentHealth,
+    setHealthMax,
+    setTempHealth,
+    tempHealth,
+  } = props
   const { isOpen, onToggle, onClose } = useDisclosure()
   const [newHealthMax, setNewHealthMax] = useState(healthMax)
   const [newTempHealth, setNewTempHealth] = useState(tempHealth)
@@ -46,10 +53,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
     setNewTempHealth(tempHealth)
   }, [tempHealth])
 
-  const handleChange: HandleChange = (
-    val,
-    setValueCallback
-  ) => {
+  const handleChange: HandleChange = (val, setValueCallback) => {
     if (isNaN(val) || !Number.isInteger(val)) {
       setValueCallback(0)
       return
@@ -61,6 +65,10 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   const handleSave: HandleSave = () => {
     setHealthMax(newHealthMax)
     setTempHealth(newTempHealth)
+
+    if (healthMax === 0) setCurrentHealth(newHealthMax)
+    if (newHealthMax < healthMax) setCurrentHealth(newHealthMax)
+
     onToggle()
   }
 
@@ -97,10 +105,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
             <NumberInput
               min={0}
               onChange={(_, valAsNumber) => {
-                handleChange(
-                  valAsNumber,
-                  setNewTempHealth
-                )
+                handleChange(valAsNumber, setNewTempHealth)
               }}
               value={newTempHealth}
             >
@@ -115,10 +120,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
         <PopoverFooter>
           <ButtonGroup>
             <Button onClick={onClose}>Cancel</Button>
-            <Button
-              colorScheme="green"
-              onClick={handleSave}
-            >
+            <Button colorScheme="green" onClick={handleSave}>
               Save
             </Button>
           </ButtonGroup>
