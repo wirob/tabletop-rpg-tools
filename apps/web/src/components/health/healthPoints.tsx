@@ -48,7 +48,7 @@ function HealthPoints(): JSX.Element | null {
 
   const handleHeal: HandleHeal = (hp) => {
     if (hp >= healthMax) setCurrentHealth(healthMax)
-    else if(hp >= (healthMax - currentHealth)) setCurrentHealth(healthMax)
+    else if (hp >= healthMax - currentHealth) setCurrentHealth(healthMax)
     else setCurrentHealth(currentHealth + hp)
     setHealthToSet(0)
   }
@@ -87,14 +87,22 @@ function HealthPoints(): JSX.Element | null {
       {/* current health */}
       <GridItem>
         <Flex h="100%">
-          <Box>
-            <Stat>
-              <StatNumber>
-                {currentHealth} / {healthMax}
-              </StatNumber>
-              <StatLabel>Health</StatLabel>
-            </Stat>
-          </Box>
+          <Flex flexDirection="column" justifyContent="space-between">
+            <Box>
+              <Stat>
+                <StatNumber>
+                  {currentHealth} / {healthMax}
+                </StatNumber>
+                <StatLabel>Health</StatLabel>
+              </Stat>
+            </Box>
+            <Box>
+              <Stat>
+                <StatNumber>{tempHealth}</StatNumber>
+                <StatLabel>Temp HP</StatLabel>
+              </Stat>
+            </Box>
+          </Flex>
           <HealthSettings
             healthMax={healthMax}
             setHealthMax={handleSetHealthMax}
