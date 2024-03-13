@@ -1,15 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import {
+  Box,
   Button,
+  Flex,
+  Grid,
+  GridItem,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  SimpleGrid,
   Stack,
   Stat,
   StatLabel,
@@ -29,6 +32,7 @@ export default function Experience(): JSX.Element | null {
       return
     }
 
+    setInvalidInput(false)
     setExpToSet(exp)
   }
 
@@ -47,43 +51,52 @@ export default function Experience(): JSX.Element | null {
   if (!toolsVisibility.experience) return null
 
   return (
-    <SimpleGrid className="mt-4" columns={3} spacing={2}>
-      <Stat>
-        <StatNumber>{currentExp}</StatNumber>
-        <StatLabel>EXP</StatLabel>
-      </Stat>
-      <Stack>
-        <NumberInput
-          clampValueOnBlur={false}
-          inputMode="numeric"
-          keepWithinRange={false}
-          maxW={20}
-          onChange={(_, valueAsNumber) => {
-            handleChange(valueAsNumber)
-          }}
-          onInvalid={() => {
-            handleOnInvalid()
-          }}
-          size="xs"
-          step={10}
+    <Grid gap={6} marginTop={8} templateColumns="repeat(3, 1fr)">
+      <GridItem>
+        <Flex justifyContent="end">
+          <Box>
+            <Stat>
+              <StatNumber>{currentExp}</StatNumber>
+              <StatLabel>EXP</StatLabel>
+            </Stat>
+          </Box>
+        </Flex>
+      </GridItem>
+      <GridItem>
+        <Stack>
+          <NumberInput
+            clampValueOnBlur={false}
+            inputMode="numeric"
+            keepWithinRange={false}
+            maxW={24}
+            onChange={(_, valueAsNumber) => {
+              handleChange(valueAsNumber)
+            }}
+            onInvalid={() => {
+              handleOnInvalid()
+            }}
+            size="md"
+            step={10}
             value={expToSet}
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper>+</NumberIncrementStepper>
+              <NumberDecrementStepper>-</NumberDecrementStepper>
+            </NumberInputStepper>
+          </NumberInput>
+        </Stack>
+      </GridItem>
+      <GridItem>
+        <Button
+          isDisabled={invalidInput}
+          onClick={() => {
+            handleAddExp()
+          }}
         >
-          <NumberInputField />
-          <NumberInputStepper>
-            <NumberIncrementStepper />
-            <NumberDecrementStepper />
-          </NumberInputStepper>
-        </NumberInput>
-      </Stack>
-
-      <Button
-        isDisabled={invalidInput}
-        onClick={() => {
-          handleAddExp()
-        }}
-      >
           Save
-      </Button>
-    </SimpleGrid>
+        </Button>
+      </GridItem>
+    </Grid>
   )
 }
