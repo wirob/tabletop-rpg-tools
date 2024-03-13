@@ -57,6 +57,7 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
   ) => {
     if (isNaN(val) || !Number.isInteger(val)) {
       onInvalidCallback(true)
+      setValueCallback(0)
       setDisabled(true)
       return
     }
