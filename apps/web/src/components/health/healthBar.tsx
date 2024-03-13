@@ -32,25 +32,27 @@ function HealthBar(props: HealthBarProps): JSX.Element {
         bottom="0"
         height={`${health}%`}
         position="absolute"
+        transitionDuration="300ms"
+        transitionProperty="all"
         width={8}
       />
       <Box
+        backgroundImage={`linear-gradient(
+          45deg,
+          ${color} 25%,
+          transparent 25%,
+          transparent 50%,
+          ${color} 50%,
+          ${color} 75%,
+          transparent 75%,
+          transparent
+        )`}
+        backgroundSize={`${size} ${size}`}
         bottom="0"
         height={`${temp}%`}
         position="absolute"
-        style={{
-          backgroundImage: `linear-gradient(
-            45deg,
-            ${color} 25%,
-            transparent 25%,
-            transparent 50%,
-            ${color} 50%,
-            ${color} 75%,
-            transparent 75%,
-            transparent
-          )`,
-          backgroundSize: `${size} ${size}`,
-        }}
+        transitionDuration="300ms"
+        transitionProperty="all"
         width={8}
       />
     </Box>
