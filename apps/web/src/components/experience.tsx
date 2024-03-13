@@ -37,7 +37,11 @@ export default function Experience(): JSX.Element | null {
   }
 
   const handleAddExp: () => void = () => {
+    if (!expToSet) return
+
     setCurrentExp(currentExp + expToSet)
+    setExpToSet(0)
+    setInvalidInput(true)
   }
 
   if (!toolsVisibility.experience) return null
@@ -62,6 +66,7 @@ export default function Experience(): JSX.Element | null {
           }}
           size="xs"
           step={10}
+            value={expToSet}
         >
           <NumberInputField />
           <NumberInputStepper>
