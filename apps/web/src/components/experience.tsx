@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import {
   Box,
@@ -66,9 +66,6 @@ export default function Experience(): JSX.Element | null {
             maxW={24}
             onChange={(_, valueAsNumber) => {
               handleChange(valueAsNumber)
-            }}
-            onInvalid={() => {
-              handleOnInvalid()
             }}
             size="md"
             step={10}
