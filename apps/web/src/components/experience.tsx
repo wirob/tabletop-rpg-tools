@@ -17,12 +17,9 @@ import {
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
-type ExpButtonText = 'Add exp' | 'Remove exp'
-
 export default function Experience(): JSX.Element | null {
   const maxExp = 999
 
-  const [expButtonText, setExpButtonText] = useState<ExpButtonText>('Add exp')
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
@@ -40,11 +37,6 @@ export default function Experience(): JSX.Element | null {
       setInvalidInput(false)
     }
   }
-
-  useEffect(() => {
-    if (expToSet < 0) setExpButtonText('Remove exp')
-    else setExpButtonText('Add exp')
-  }, [expToSet])
 
   const handleOnInvalid: () => void = () => {
     setInvalidInput(true)
@@ -87,14 +79,12 @@ export default function Experience(): JSX.Element | null {
       </Stack>
 
       <Button
-        colorScheme="green"
         isDisabled={invalidInput}
         onClick={() => {
           handleAddExp()
         }}
-        size="xs"
       >
-        {expButtonText}
+          Save
       </Button>
     </SimpleGrid>
   )
