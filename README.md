@@ -45,3 +45,7 @@ In the root of the project, run:
 ``` bash
 pnpm dev
 ```
+
+## Issue tracking
+
+This project has all its issues and tracking on Linear adn can be found [here](https://linear.app/ttrpg-tools/team/TAB/active). Ask a dev for access.
