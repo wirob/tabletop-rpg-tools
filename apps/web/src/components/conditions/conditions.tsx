@@ -68,7 +68,7 @@ function Conditions(): JSX.Element | null {
         </GridItem>
       </Grid>
       {currentConditions.length > 0 ? (
-        <Flex gap={2} wrap="wrap">
+        <Flex gap={4} wrap="wrap">
           {currentConditions.map((condition) => (
             <Tag key={condition} size="lg">
               <TagLabel>{condition}</TagLabel>
