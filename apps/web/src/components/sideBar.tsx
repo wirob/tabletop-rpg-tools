@@ -87,6 +87,17 @@ function SideBar(): JSX.Element {
                 />
               </Flex>
               <Flex>
+                <FormLabel htmlFor="notes-tool">Conditions</FormLabel>
+                <Spacer />
+                <Switch
+                  id="notes-tool"
+                  isChecked={toolsVisibility.conditions}
+                  onChange={(event) => {
+                    handleChange('conditions', event.currentTarget.checked)
+                  }}
+                />
+              </Flex>
+              <Flex>
                 <FormLabel htmlFor="notes-tool">Notes</FormLabel>
                 <Spacer />
                 <Switch
