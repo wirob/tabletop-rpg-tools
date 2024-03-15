@@ -19,10 +19,20 @@ function HealthBar(props: HealthBarProps): JSX.Element {
   const grey = useColorModeValue('gray.100', 'whiteAlpha.200')
 
   useEffect(() => {
-    if (health <= 25) setHealthBarColor(red)
-    else if (health <= 45) setHealthBarColor(orange)
+    if (health <= 20) setHealthBarColor(red)
+    else if (health <= 40) setHealthBarColor(midOrangeRed)
+    else if (health <= 60) setHealthBarColor(orange)
+    else if (health <= 80) setHealthBarColor(midGreenOrange)
     else setHealthBarColor(green)
-  }, [health, setHealthBarColor, red, green, orange])
+  }, [
+    green,
+    health,
+    midGreenOrange,
+    midOrangeRed,
+    orange,
+    red,
+    setHealthBarColor,
+  ])
 
   const size = '1rem'
   const color = 'rgba(255, 255, 255, 0.8)'
