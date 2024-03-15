@@ -10,7 +10,8 @@ import {
   TagLabel,
   TagCloseButton,
 } from '@repo/ui/chakra'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 import pathfinderConditions from './pathfinderConditions'
 
@@ -21,17 +22,24 @@ type PathFinderConditions = (typeof pathfinderConditions)[number]
 function Conditions(): JSX.Element | null {
   const { toolsVisibility } = useToolsVisibility()
   const [selectableConditions, setSelectableConditions] =
-    useState(pathfinderConditions)
-  const [currentConditions, setCurrentConditions] = useState<
-    PathFinderConditions[]
-  >([])
+    useState<string[]>(pathfinderConditions)
+  const [currentConditions, setCurrentConditions] = useLocalStorage<string[]>(
+    'userConditions',
+    []
+  )
+
+  useEffect(() => {
+    setSelectableConditions((prev) => {
+      return prev.filter((c) => !currentConditions.includes(c))
+    })
+  }, [currentConditions])
 
   const handleChange: HandleChange = (val) => {
     if (!val) return
 
     setCurrentConditions((prev) => [...prev, val])
-    setSelectableConditions((prev) => prev.filter((c) => c !== val))
   }
+
   const handleRemoveCondition = (condition: PathFinderConditions) => {
     setCurrentConditions((prev) => prev.filter((c) => c !== condition))
     setSelectableConditions((prev) => [...prev, condition].sort())
