@@ -20,6 +20,7 @@ export function ToolsVisibilityProvider({
       actions: true,
       experience: true,
       health: true,
+      conditions: true,
       notes: true,
     })
 

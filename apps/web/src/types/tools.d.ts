@@ -1,3 +1,3 @@
-type ToolNames = 'health' | 'notes' | 'experience' | 'actions'
+type ToolNames = 'health' | 'notes' | 'experience' | 'actions' | 'conditions'
 
 type ToolsVisibility = { [keyof in ToolNames]: boolean }

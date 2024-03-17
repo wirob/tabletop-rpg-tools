@@ -1,4 +1,5 @@
 import Actions from '@/components/actions'
+import Conditions from '@/components/conditions'
 import Experience from '@/components/experience'
 import HealthPoints from '@/components/health/healthPoints'
 import Notes from '@/components/notes'
@@ -11,6 +12,7 @@ export default function Page(): JSX.Element {
       <Actions />
       <Experience />
       <HealthPoints />
+      <Conditions />
       <Notes />
     </main>
   )
