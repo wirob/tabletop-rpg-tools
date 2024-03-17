@@ -16,8 +16,8 @@ import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 import pathfinderConditions from './pathfinderConditions'
 
 type HandleChange = (val: PathFinderConditions | undefined) => void
-
 type PathFinderConditions = (typeof pathfinderConditions)[number]
+type HandleRemoveCondition = (condition: PathFinderConditions) => void
 
 function Conditions(): JSX.Element | null {
   const { toolsVisibility } = useToolsVisibility()
@@ -35,12 +35,13 @@ function Conditions(): JSX.Element | null {
   }, [currentConditions])
 
   const handleChange: HandleChange = (val) => {
+    // Placeholder select can be undefined
     if (!val) return
 
     setCurrentConditions((prev) => [...prev, val])
   }
 
-  const handleRemoveCondition = (condition: PathFinderConditions) => {
+  const handleRemoveCondition: HandleRemoveCondition = (condition) => {
     setCurrentConditions((prev) => prev.filter((c) => c !== condition))
     setSelectableConditions((prev) => [...prev, condition].sort())
   }
