@@ -38,20 +38,13 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
     healthMax,
     setCurrentHealth,
     setHealthMax,
-    setTempHealth,
-    tempHealth,
   } = props
   const { isOpen, onToggle, onClose } = useDisclosure()
   const [newHealthMax, setNewHealthMax] = useState(healthMax)
-  const [newTempHealth, setNewTempHealth] = useState(tempHealth)
 
   useEffect(() => {
     setNewHealthMax(healthMax)
   }, [healthMax])
-
-  useEffect(() => {
-    setNewTempHealth(tempHealth)
-  }, [tempHealth])
 
   const handleChange: HandleChange = (val, setValueCallback) => {
     if (isNaN(val) || !Number.isInteger(val)) {
@@ -64,7 +57,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
 
   const handleSave: HandleSave = () => {
     setHealthMax(newHealthMax)
-    setTempHealth(newTempHealth)
 
     if (healthMax === 0) setCurrentHealth(newHealthMax)
     if (newHealthMax < healthMax) setCurrentHealth(newHealthMax)
@@ -94,20 +86,6 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
                 handleChange(valAsNumber, setNewHealthMax)
               }}
               value={newHealthMax}
-            >
-              <NumberInputField />
-              <NumberInputStepper>
-                <NumberIncrementStepper />
-                <NumberDecrementStepper />
-              </NumberInputStepper>
-            </NumberInput>
-            <FormLabel>Temp HP</FormLabel>
-            <NumberInput
-              min={0}
-              onChange={(_, valAsNumber) => {
-                handleChange(valAsNumber, setNewTempHealth)
-              }}
-              value={newTempHealth}
             >
               <NumberInputField />
               <NumberInputStepper>

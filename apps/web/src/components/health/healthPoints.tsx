@@ -27,6 +27,7 @@ type HandleHeal = (hp: number) => void
 type HandleDamage = (dmg: number) => void
 type HandleSetHealthMax = (val: number) => void
 type HandleFullHealthClick = () => void
+type HandleTempHealthChange = (val: number) => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
@@ -72,6 +73,15 @@ function HealthPoints(): JSX.Element | null {
     setCurrentHealth(healthMax)
   }
 
+  const handleTempHealthChange: HandleTempHealthChange = (val) => {
+    if (isNaN(val) || !Number.isInteger(val)) {
+      setTempHealth(0)
+      return
+    }
+
+    setTempHealth(val)
+  }
+
   useEffect(() => {
     setHealthPercentage((currentHealth / healthMax) * 100)
   }, [healthMax, currentHealth])
@@ -98,7 +108,31 @@ function HealthPoints(): JSX.Element | null {
             </Box>
             <Box>
               <Stat>
-                <StatNumber>{tempHealth}</StatNumber>
+                <StatNumber>
+                  <NumberInput
+                    defaultValue={0}
+                    inputMode="numeric"
+                    max={999}
+                    min={0}
+                    onChange={(_, valueAsNumber) => {
+                      handleTempHealthChange(valueAsNumber)
+                    }}
+                    size="lg"
+                    value={tempHealth}
+                    variant="outline"
+                  >
+                    <NumberInputField
+                      fontSize="x-large"
+                      onFocus={(event) => {
+                        event.preventDefault()
+                        event.target.select()
+                      }}
+                      paddingLeft={2}
+                      paddingRight={0}
+                      width="60px"
+                    />
+                  </NumberInput>
+                </StatNumber>
                 <StatLabel>Temp HP</StatLabel>
               </Stat>
             </Box>
