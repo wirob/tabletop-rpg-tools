@@ -17,7 +17,6 @@ import {
   StatNumber,
   StatLabel,
   Spacer,
-  Text,
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 import HealthSettings from './healthSettings'
