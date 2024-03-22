@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  Accordion,
   AccordionButton,
   AccordionIcon,
   AccordionItem,
@@ -43,7 +42,7 @@ function ComponentSettings(): JSX.Element {
   }
 
   return (
-    <Accordion allowToggle>
+
       <AccordionItem>
         <Heading size="sm">
           <AccordionButton>
@@ -85,7 +84,7 @@ function ComponentSettings(): JSX.Element {
           </FormControl>
         </AccordionPanel>
       </AccordionItem>
-    </Accordion>
+
   )
 }
 
