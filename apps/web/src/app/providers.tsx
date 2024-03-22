@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@repo/ui/theme'
 import { cookies } from 'next/headers'
 import { ToolsVisibilityProvider } from '@/app/context/toolsVisibilityContext'
+import { ComponentSettingsProvider } from '@/app/context/componentSettingsContext'
 
 export function Providers({
   children,
@@ -13,7 +14,9 @@ export function Providers({
     <ThemeProvider
       cookies={chakraCookie ? `chakra-ui-color-mode=${chakraCookie.value}` : ''}
     >
-      <ToolsVisibilityProvider>{children}</ToolsVisibilityProvider>
+      <ComponentSettingsProvider>
+        <ToolsVisibilityProvider>{children}</ToolsVisibilityProvider>
+      </ComponentSettingsProvider>
     </ThemeProvider>
   )
 }
