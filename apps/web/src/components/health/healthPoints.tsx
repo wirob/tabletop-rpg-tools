@@ -163,7 +163,12 @@ function HealthPoints(): JSX.Element | null {
             value={healthToSet}
             width={48}
           >
-            <NumberInputField />
+            <NumberInputField
+              onFocus={(event) => {
+                event.preventDefault()
+                event.target.select()
+              }}
+            />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
