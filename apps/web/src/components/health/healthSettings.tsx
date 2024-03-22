@@ -34,11 +34,7 @@ type HandleChange = (
 type HandleSave = () => void
 
 function HealthSettings(props: HealthSettingsProps): JSX.Element {
-  const {
-    healthMax,
-    setCurrentHealth,
-    setHealthMax,
-  } = props
+  const { healthMax, setCurrentHealth, setHealthMax } = props
   const { isOpen, onToggle, onClose } = useDisclosure()
   const [newHealthMax, setNewHealthMax] = useState(healthMax)
 
@@ -87,7 +83,12 @@ function HealthSettings(props: HealthSettingsProps): JSX.Element {
               }}
               value={newHealthMax}
             >
-              <NumberInputField />
+              <NumberInputField
+                onFocus={(event) => {
+                  event.preventDefault()
+                  event.target.select()
+                }}
+              />
               <NumberInputStepper>
                 <NumberIncrementStepper />
                 <NumberDecrementStepper />

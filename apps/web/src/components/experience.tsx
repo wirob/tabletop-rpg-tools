@@ -71,7 +71,12 @@ export default function Experience(): JSX.Element | null {
             step={10}
             value={expToSet}
           >
-            <NumberInputField />
+            <NumberInputField
+              onFocus={(event) => {
+                event.preventDefault()
+                event.target.select()
+              }}
+            />
             <NumberInputStepper>
               <NumberIncrementStepper>+</NumberIncrementStepper>
               <NumberDecrementStepper>-</NumberDecrementStepper>
