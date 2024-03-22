@@ -8,8 +8,8 @@ interface ToolsVisibilityContextType {
   setToolsVisibility: (name: ToolNames, value: boolean) => void
 }
 
-const ToolsVisibilityContext = createContext<ToolsVisibilityContextType>(
-  {} as ToolsVisibilityContextType
+const ToolsVisibilityContext = createContext<ToolsVisibilityContextType | null>(
+  null
 )
 
 export function ToolsVisibilityProvider({
@@ -41,5 +41,12 @@ export function ToolsVisibilityProvider({
 }
 
 export function useToolsVisibility(): ToolsVisibilityContextType {
-  return useContext(ToolsVisibilityContext)
+  const context = useContext(ToolsVisibilityContext)
+
+  if (!context)
+    throw new Error(
+      'useToolsVisibility has to be used within <ToolsVisibilityProvider.Provider>'
+    )
+
+  return context
 }

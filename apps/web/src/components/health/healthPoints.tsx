@@ -19,37 +19,36 @@ import {
   Spacer,
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
-import HealthSettings from './healthSettings'
+import { useComponentSettings } from '@/app/context/componentSettingsContext'
 import HealthBar from './healthBar'
 
 type HandleHealthChange = (health: number) => void
 type HandleHeal = (hp: number) => void
 type HandleDamage = (dmg: number) => void
-type HandleSetHealthMax = (val: number) => void
 type HandleFullHealthClick = () => void
 type HandleTempHealthChange = (val: number) => void
 
 function HealthPoints(): JSX.Element | null {
   const [currentHealth, setCurrentHealth] = useLocalStorage('userHealth', 0)
-  const [healthMax, setHealthMax] = useLocalStorage('userHealthMax', 0)
   const [tempHealth, setTempHealth] = useLocalStorage('userHealthTemp', 0)
   const [healthToSet, setHealthToSet] = useState(0)
   const [healthPercentage, setHealthPercentage] = useState(0)
   const [tempHealthPercentage, setTempHealthPercentage] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
+  const { healthSettings: health } = useComponentSettings()
 
-  const handleHealthChange: HandleHealthChange = (health) => {
-    if (!Number.isInteger(health)) {
+  const handleHealthChange: HandleHealthChange = (hp) => {
+    if (!Number.isInteger(hp)) {
       setHealthToSet(0)
       return
     }
 
-    setHealthToSet(health)
+    setHealthToSet(hp)
   }
 
   const handleHeal: HandleHeal = (hp) => {
-    if (hp >= healthMax) setCurrentHealth(healthMax)
-    else if (hp >= healthMax - currentHealth) setCurrentHealth(healthMax)
+    if (hp >= health.max) setCurrentHealth(health.max)
+    else if (hp >= health.max - currentHealth) setCurrentHealth(health.max)
     else setCurrentHealth(currentHealth + hp)
     setHealthToSet(0)
   }
@@ -65,12 +64,8 @@ function HealthPoints(): JSX.Element | null {
     setHealthToSet(0)
   }
 
-  const handleSetHealthMax: HandleSetHealthMax = (val) => {
-    setHealthMax(val)
-  }
-
   const handleFullHealthClick: HandleFullHealthClick = () => {
-    setCurrentHealth(healthMax)
+    setCurrentHealth(health.max)
   }
 
   const handleTempHealthChange: HandleTempHealthChange = (val) => {
@@ -83,12 +78,16 @@ function HealthPoints(): JSX.Element | null {
   }
 
   useEffect(() => {
-    setHealthPercentage((currentHealth / healthMax) * 100)
-  }, [healthMax, currentHealth])
+    setHealthPercentage((currentHealth / health.max) * 100)
+  }, [health.max, currentHealth])
 
   useEffect(() => {
-    setTempHealthPercentage((tempHealth / healthMax) * 100)
-  }, [healthMax, tempHealth])
+    setTempHealthPercentage((tempHealth / health.max) * 100)
+  }, [health.max, tempHealth])
+
+  useEffect(() => {
+    if (health.max < currentHealth) setCurrentHealth(health.max)
+  }, [health.max, currentHealth, setCurrentHealth])
 
   if (!toolsVisibility.health) return null
 
@@ -101,7 +100,7 @@ function HealthPoints(): JSX.Element | null {
             <Box>
               <Stat>
                 <StatNumber>
-                  {currentHealth} / {healthMax}
+                  {currentHealth} / {health.max}
                 </StatNumber>
                 <StatLabel>Health</StatLabel>
               </Stat>
@@ -137,13 +136,6 @@ function HealthPoints(): JSX.Element | null {
               </Stat>
             </Box>
           </Flex>
-          <HealthSettings
-            healthMax={healthMax}
-            setCurrentHealth={setCurrentHealth}
-            setHealthMax={handleSetHealthMax}
-            setTempHealth={setTempHealth}
-            tempHealth={tempHealth}
-          />
           <Spacer />
           <HealthBar health={healthPercentage} temp={tempHealthPercentage} />
         </Flex>
