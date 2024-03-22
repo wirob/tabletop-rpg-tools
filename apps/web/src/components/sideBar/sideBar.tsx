@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  Box,
+  Accordion,
   Button,
   Drawer,
   DrawerBody,
@@ -40,10 +40,10 @@ function SideBar(): JSX.Element {
           <DrawerCloseButton />
           <DrawerHeader>Settings</DrawerHeader>
           <DrawerBody>
-            <Box>
+            <Accordion allowMultiple>
               <ToolsVisibility />
               <ComponentSettings />
-            </Box>
+            </Accordion>
           </DrawerBody>
           <DrawerFooter>
             <Button
