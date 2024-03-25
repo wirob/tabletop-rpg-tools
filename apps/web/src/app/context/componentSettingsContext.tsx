@@ -4,10 +4,13 @@ import { createContext, useContext, type PropsWithChildren } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
 type HandleHealthChange = (value: HealthSettings) => void
+type HandleExperienceChange = (value: ExperienceSettings) => void
 
 interface ComponentSettingsContextType {
   setHealthSettings: HandleHealthChange
   healthSettings: HealthSettings
+  experienceSettings: ExperienceSettings
+  setExperienceSettings: HandleExperienceChange
 }
 
 const ComponentSettingsContext =
@@ -29,12 +32,21 @@ export function ComponentSettingsProvider({
   )
 
   const handleHealthChange: HandleHealthChange = (health) => {
-    setComponentSettings((prev) => ({...prev, health}))
+    setComponentSettings((prev) => ({ ...prev, health }))
+  }
+
+  const handleExperienceChange: HandleExperienceChange = (experience) => {
+    setComponentSettings((prev) => ({ ...prev, experience }))
   }
 
   return (
     <ComponentSettingsContext.Provider
-      value={{ healthSettings: componentSettings.health, setHealthSettings: handleHealthChange }}
+      value={{
+        healthSettings: componentSettings.health,
+        setHealthSettings: handleHealthChange,
+        experienceSettings: componentSettings.experience,
+        setExperienceSettings: handleExperienceChange,
+      }}
     >
       {children}
     </ComponentSettingsContext.Provider>
