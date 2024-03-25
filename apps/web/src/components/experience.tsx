@@ -19,12 +19,14 @@ import {
   StatNumber,
 } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
+import { useComponentSettings } from '@/app/context/componentSettingsContext'
 
 export default function Experience(): JSX.Element | null {
   const [currentExp, setCurrentExp] = useLocalStorage('userExp', 0)
   const [invalidInput, setInvalidInput] = useState(true)
   const [expToSet, setExpToSet] = useState(0)
   const { toolsVisibility } = useToolsVisibility()
+  const { experienceSettings } = useComponentSettings()
 
   const handleChange: (exp: number) => void = (exp) => {
     if (isNaN(exp)) setExpToSet(0)
@@ -68,7 +70,7 @@ export default function Experience(): JSX.Element | null {
               handleChange(valueAsNumber)
             }}
             size="md"
-            step={10}
+            step={experienceSettings.increment || 10}
             value={expToSet}
           >
             <NumberInputField
