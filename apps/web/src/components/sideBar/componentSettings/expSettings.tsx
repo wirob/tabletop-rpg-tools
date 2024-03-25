@@ -60,6 +60,7 @@ function ExpSettings(): JSX.Element {
               Incrementor
               <Tooltip
                 aria-label="Set how much the '+' and '-' (including using the arrowkeys) will increment"
+                hasArrow
                 label="Set how much the '+' and '-' (including using the arrowkeys) will increment"
               >
                 <QuestionOutlineIcon marginLeft={1} />
