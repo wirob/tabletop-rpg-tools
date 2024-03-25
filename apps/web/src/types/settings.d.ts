@@ -10,5 +10,5 @@ interface HealthSettings {
 }
 
 interface ExperienceSettings {
-  increment: number
+  increment?: number
 }
