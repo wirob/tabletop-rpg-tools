@@ -13,20 +13,44 @@ import {
 import { useEffect, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
+import { useComponentSettings } from '@/app/context/componentSettingsContext'
 import pathfinderConditions from './pathfinderConditions'
+import dnd5eConditions from './dnd5eConditions'
 
 type HandleChange = (val: PathFinderConditions | undefined) => void
 type PathFinderConditions = (typeof pathfinderConditions)[number]
 type HandleRemoveCondition = (condition: PathFinderConditions) => void
 
+function selectConditionsSourceToUse(selected: ConditionsSources): string[] {
+  switch (selected) {
+    case 'pathfinder':
+      return pathfinderConditions
+
+    case 'dnd5e':
+      return dnd5eConditions
+
+    default:
+      throw new Error('Not a valid source')
+  }
+}
+
 function Conditions(): JSX.Element | null {
   const { toolsVisibility } = useToolsVisibility()
-  const [selectableConditions, setSelectableConditions] =
-    useState<string[]>(pathfinderConditions)
+  const { conditionsSettings } = useComponentSettings()
+  const [selectableConditions, setSelectableConditions] = useState<string[]>(
+    selectConditionsSourceToUse(conditionsSettings.source)
+  )
   const [currentConditions, setCurrentConditions] = useLocalStorage<string[]>(
     'userConditions',
     []
   )
+
+  useEffect(() => {
+    setSelectableConditions(
+      selectConditionsSourceToUse(conditionsSettings.source)
+    )
+    setCurrentConditions([])
+  }, [conditionsSettings.source, setCurrentConditions])
 
   useEffect(() => {
     setSelectableConditions((prev) => {
