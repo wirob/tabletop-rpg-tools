@@ -11,6 +11,8 @@ interface ComponentSettingsContextType {
   healthSettings: HealthSettings
   experienceSettings: ExperienceSettings
   setExperienceSettings: HandleExperienceChange
+  conditionsSettings: ConditionsSettings
+  setConditionsSettings: HandleConditionsChange
 }
 
 const ComponentSettingsContext =
@@ -28,11 +30,18 @@ export function ComponentSettingsProvider({
       experience: {
         increment: 10,
       },
+      conditions: {
+        source: 'pathfinder',
+      },
     }
   )
 
   const handleHealthChange: HandleHealthChange = (health) => {
     setComponentSettings((prev) => ({ ...prev, health }))
+  }
+
+  const handleConditionsChange: HandleConditionsChange = (conditions) => {
+    setComponentSettings((prev) => ({ ...prev, conditions }))
   }
 
   const handleExperienceChange: HandleExperienceChange = (experience) => {
@@ -46,6 +55,8 @@ export function ComponentSettingsProvider({
         setHealthSettings: handleHealthChange,
         experienceSettings: componentSettings.experience,
         setExperienceSettings: handleExperienceChange,
+        conditionsSettings: componentSettings.conditions,
+        setConditionsSettings: handleConditionsChange,
       }}
     >
       {children}
