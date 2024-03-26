@@ -34,7 +34,7 @@ function SideBar(): JSX.Element {
         />
       </div>
 
-      <Drawer isOpen={isOpen} onClose={onClose} placement="left">
+      <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="sm">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
