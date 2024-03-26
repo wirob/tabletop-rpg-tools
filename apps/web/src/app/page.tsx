@@ -1,3 +1,6 @@
+'use client'
+
+import { Flex } from '@repo/ui/chakra'
 import Actions from '@/components/actions'
 import Conditions from '@/components/conditions'
 import Experience from '@/components/experience'
@@ -7,13 +10,15 @@ import SideBar from '@/components/sideBar'
 
 export default function Page(): JSX.Element {
   return (
-    <main className="flex flex-col items-center">
-      <SideBar />
-      <Actions />
-      <Experience />
-      <HealthPoints />
-      <Conditions />
-      <Notes />
+    <main>
+      <Flex align="center" direction="column">
+        <SideBar />
+        <Actions />
+        <Experience />
+        <HealthPoints />
+        <Conditions />
+        <Notes />
+      </Flex>
     </main>
   )
 }

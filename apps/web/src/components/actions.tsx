@@ -8,7 +8,7 @@ import {
   Reaction as ReactionIcon,
   DoubleAction as DoubleActionIcon,
 } from '@repo/ui/icons'
-import { Button, IconButton } from '@repo/ui/chakra'
+import { Button, Grid, GridItem, IconButton } from '@repo/ui/chakra'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
 type ActionsAvailable = {
@@ -56,60 +56,73 @@ export default function Actions(): JSX.Element | null {
   if (!toolsVisibility.actions) return null
 
   return (
-    <div className="grid gap-2 grid-cols-6 mt-4">
-      <IconButton
-        aria-label="free action"
-        icon={<FreeActionIcon />}
-        isDisabled={actions.free}
-        onClick={() => {
-          handleClick('free', 0)
-        }}
-      />
-
-      <IconButton
-        aria-label="single action"
-        icon={<SingleActionIcon />}
-        isDisabled={actions.single}
-        onClick={() => {
-          handleClick('single', 1)
-        }}
-      />
-
-      <IconButton
-        aria-label="double action"
-        icon={<DoubleActionIcon />}
-        isDisabled={actions.double}
-        onClick={() => {
-          handleClick('double', 2)
-        }}
-      />
-
-      <IconButton
-        aria-label="triple action"
-        icon={<TripleActionIcon />}
-        isDisabled={actions.triple}
-        onClick={() => {
-          handleClick('triple', 3)
-        }}
-      />
-
-      <IconButton
-        aria-label="reaction"
-        icon={<ReactionIcon />}
-        isDisabled={actions.reaction}
-        onClick={() => {
-          handleClick('reaction', 0)
-        }}
-      />
-
-      <Button
-        colorScheme="red"
-        onClick={() => {
-          handleReset()
-        }}
-      >
-        Reset
-      </Button>
-    </div>
+    <Grid gap={2} marginTop={4} templateColumns="repeat(6, 1fr)">
+      <GridItem width="100%">
+        <IconButton
+          aria-label="free action"
+          icon={<FreeActionIcon />}
+          isDisabled={actions.free}
+          onClick={() => {
+            handleClick('free', 0)
+          }}
+          width="100%"
+        />
+      </GridItem>
+      <GridItem width="100%">
+        <IconButton
+          aria-label="single action"
+          icon={<SingleActionIcon />}
+          isDisabled={actions.single}
+          onClick={() => {
+            handleClick('single', 1)
+          }}
+          width="100%"
+        />
+      </GridItem>
+      <GridItem width="100%">
+        <IconButton
+          aria-label="double action"
+          icon={<DoubleActionIcon />}
+          isDisabled={actions.double}
+          onClick={() => {
+            handleClick('double', 2)
+          }}
+          width="100%"
+        />
+      </GridItem>
+      <GridItem width="100%">
+        <IconButton
+          aria-label="triple action"
+          icon={<TripleActionIcon />}
+          isDisabled={actions.triple}
+          onClick={() => {
+            handleClick('triple', 3)
+          }}
+          width="100%"
+        />
+      </GridItem>
+      <GridItem width="100%">
+        <IconButton
+          aria-label="reaction"
+          icon={<ReactionIcon />}
+          isDisabled={actions.reaction}
+          onClick={() => {
+            handleClick('reaction', 0)
+          }}
+          width="100%"
+        />
+      </GridItem>
+      <GridItem width="100%">
+        <Button
+          colorScheme="red"
+          onClick={() => {
+            handleReset()
+          }}
+          width="100%"
+        >
+          Reset
+        </Button>
+      </GridItem>
+    </Grid>
   )
 }
