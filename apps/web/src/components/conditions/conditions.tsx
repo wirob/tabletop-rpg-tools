@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
+import { useComponentSettings } from '@/app/context/componentSettingsContext'
 import pathfinderConditions from './pathfinderConditions'
 import dnd5eConditions from './dnd5eConditions'
 
@@ -35,12 +36,21 @@ function selectConditionsSourceToUse(selected: ConditionsSources): string[] {
 
 function Conditions(): JSX.Element | null {
   const { toolsVisibility } = useToolsVisibility()
-  const [selectableConditions, setSelectableConditions] =
-    useState<string[]>(pathfinderConditions)
+  const { conditionsSettings } = useComponentSettings()
+  const [selectableConditions, setSelectableConditions] = useState<string[]>(
+    selectConditionsSourceToUse(conditionsSettings.source)
+  )
   const [currentConditions, setCurrentConditions] = useLocalStorage<string[]>(
     'userConditions',
     []
   )
+
+  useEffect(() => {
+    setSelectableConditions(
+      selectConditionsSourceToUse(conditionsSettings.source)
+    )
+    setCurrentConditions([])
+  }, [conditionsSettings.source, setCurrentConditions])
 
   useEffect(() => {
     setSelectableConditions((prev) => {
