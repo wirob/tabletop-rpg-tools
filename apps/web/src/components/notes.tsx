@@ -1,6 +1,6 @@
 'use client'
 
-import { Textarea } from '@repo/ui/chakra'
+import { Box, Textarea } from '@repo/ui/chakra'
 import { useLocalStorage } from 'usehooks-ts'
 import { useToolsVisibility } from '@/app/context/toolsVisibilityContext'
 
@@ -16,14 +16,14 @@ function Notes(): JSX.Element | null {
 
   if (!toolsVisibility.notes) return null
   return (
-    <div className="mt-4">
+    <Box marginTop={4}>
       <Textarea
         onChange={(event) => {
           handleInputChange(event.target.value)
         }}
         value={notes}
       />
-    </div>
+    </Box>
   )
 }
 

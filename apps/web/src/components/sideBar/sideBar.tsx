@@ -16,6 +16,7 @@ import {
   useDisclosure,
   MoonIcon,
   SunIcon,
+  Box,
 } from '@repo/ui/chakra'
 import ToolsVisibility from './toolsVisibility'
 import ComponentSettings from './componentSettings'
@@ -26,13 +27,13 @@ function SideBar(): JSX.Element {
 
   return (
     <>
-      <div className="fixed top-0 left-0">
+      <Box left={0} position="fixed" top={0}>
         <IconButton
           aria-label="open settings"
           icon={<SettingsIcon />}
           onClick={onOpen}
         />
-      </div>
+      </Box>
 
       <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="sm">
         <DrawerOverlay />
