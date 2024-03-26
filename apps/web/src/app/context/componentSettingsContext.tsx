@@ -3,8 +3,9 @@
 import { createContext, useContext, type PropsWithChildren } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
-type HandleHealthChange = (value: HealthSettings) => void
-type HandleExperienceChange = (value: ExperienceSettings) => void
+type HandleHealthChange = (health: HealthSettings) => void
+type HandleExperienceChange = (experience: ExperienceSettings) => void
+type HandleConditionsChange = (conditions: ConditionsSettings) => void
 
 interface ComponentSettingsContextType {
   setHealthSettings: HandleHealthChange
