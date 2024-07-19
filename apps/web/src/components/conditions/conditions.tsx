@@ -41,7 +41,7 @@ function Conditions(): JSX.Element | null {
     selectConditionsSourceToUse(conditionsSettings.source)
   )
   const [currentConditions, setCurrentConditions] = useLocalStorage<string[]>(
-    'userConditions',
+    `userConditions${conditionsSettings.source}`,
     []
   )
 
