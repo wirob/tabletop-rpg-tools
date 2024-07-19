@@ -49,7 +49,6 @@ function Conditions(): JSX.Element | null {
     setSelectableConditions(
       selectConditionsSourceToUse(conditionsSettings.source)
     )
-    setCurrentConditions([])
   }, [conditionsSettings.source, setCurrentConditions])
 
   useEffect(() => {
